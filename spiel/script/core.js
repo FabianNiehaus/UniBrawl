@@ -63,6 +63,7 @@ MainGame.prototype = {
         player2.body.gravity.y = 450;
         player2.animations.add('left',[0,1],5,true);
         player2.animations.add('right',[2,3],5,true);
+		player2.direction = 'right';
 
 
         platforms = game.add.group();
@@ -81,9 +82,12 @@ MainGame.prototype = {
         pright.body.immovable = true;
 
         p1cursors = game.input.keyboard.createCursorKeys();
+		p1shoot = game.input.keyboard.addKey(Phaser.Keyboard.M);
         p2leftBtn = game.input.keyboard.addKey(Phaser.Keyboard.A);
         p2rightBtn = game.input.keyboard.addKey(Phaser.Keyboard.D);
         p2upBtn = game.input.keyboard.addKey(Phaser.Keyboard.W);
+		p2shoot = game.input.keyboard.addKey(Phaser.Keyboard.F);
+		
     },
 
     update: function() {
@@ -117,16 +121,16 @@ MainGame.prototype = {
             player1.frame = 4;
         }
 
-        if(p1cursors.up.isDown && projectile_timeout_player1 === 0){
+        if(p1shoot.isDown && projectile_timeout_player1 === 0){
             Projectile(player1.x,player1.y,player1.body.velocity.x,1);
             projectile_timeout_player1 = 10;
         }
 
-		/*
+		
 		 if(p1cursors.up.isDown && player1.body.touching.down){
 		 player1.body.velocity.y = -350;
 		 }
-		 */
+		 
 
         if(p2leftBtn.isDown){
             player2.body.velocity.x = -150;
@@ -141,13 +145,13 @@ MainGame.prototype = {
             //player2.frame = 1;
         }
 
-		/*
+		
 		 if(p2upBtn.isDown && player2.body.touching.down){
 		 player2.body.velocity.y = -350;
 		 }
-		 */
+		 
 
-        if(p2upBtn.isDown && projectile_timeout_player2 === 0){
+        if(p2shoot.isDown && projectile_timeout_player2 === 0){
             Projectile(player2.x,player2.y,player2.body.velocity.x,2);
             projectile_timeout_player2 = 10;
         }
@@ -182,7 +186,8 @@ function Projectile(x, y, x_velocity, player) {
         case 2:
 
             proj = projectiles_player2.create(x,y,'projectile');
-
+			
+			proj_init_vel = 500;
             //Startverktor für Projektil bestimmen
             if(player2.direction === 'right'){
                 proj.body.velocity.x = proj_init_vel + x_velocity;
@@ -204,6 +209,6 @@ function Projectile(x, y, x_velocity, player) {
     proj.body.gravity.y = 50;
 
     //Bounce für Projektil erstellen
-    proj.body.bounce = 0.5;
+    proj.body.bounce = 0;
 
 }
