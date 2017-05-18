@@ -77,7 +77,7 @@ MainGame.prototype = {
         game.load.spritesheet('player','assets/dude.png',32,48);
         game.load.spritesheet('meleeAttack','assets/firstaid.png',32,32);
         game.load.spritesheet('projectile','assets/kugel.png');
-        game.load.spritesheet('player2','assets/baddie.png',32,32);
+        game.load.spritesheet('player2','assets/baddie.png',62.25,100);
         game.load.image('ground','assets/platform.png');
     },
 
