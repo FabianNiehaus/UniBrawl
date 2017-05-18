@@ -26,7 +26,12 @@ function MeleeWeapon(x, y, sprite, damage, knockbackAmount, knockbackDirection, 
     this.knockbackAmount = knockbackAmount;
     this.knockbackDamage = knockbackDirection;
 
-    this.object.animations.add("meleeAttack",[1,0,1,2,1],9,false);
+    //this.object.animations.add("meleeAttack",[1,0,1,2,1],9,false);
+    this.object.animations.add("meleeAttack",[0,1,2,3],2,false);
+    this.object.animations.add("idle",[0],0,false);
+
+    this.attackFrame = 0;
+    this.attackFrameTimeout = 0;
 }
 
 function Player(id,x,y,sprite,animations,game) {
@@ -54,33 +59,11 @@ setMeleeWeapon = function(player, melee){
     player.object.addChild(melee.object);
 };
 
-/*
-meleeAttack = function(player){
-    player.melee.object.x = player.melee.object.x + 20;
-    player.melee.object.y = player.melee.object.y + 5;
-
-    if (player.meleeTimeout === 0) {
-        if (player.id === 1) {
-            game.physics.arcade.overlap(player.melee.object, player2.object);
-        }
-        if (player.id === 2) {
-            game.physics.arcade.collide(player.melee.object, player1.object);
-        }
-        player.meleeTimeout = 10;
-    } else {
-        player.meleeTimeout--;
-    }
-
-    player.melee.object.x = player.melee.object.x - 20;
-    player.melee.object.y = player.melee.object.y - 5;
-};
-*/
-
 MainGame.prototype = {
 
     preload: function() {
         game.load.spritesheet('player','assets/dude.png',32,48);
-        game.load.spritesheet('meleeAttack','assets/meleeAttack.png',60,71);
+        game.load.spritesheet('meleeAttack','assets/firstaid.png',32,32);
         game.load.spritesheet('projectile','assets/firstaid.png');
         game.load.spritesheet('player2','assets/baddie.png',32,32);
         game.load.image('ground','assets/platform.png');
@@ -92,8 +75,9 @@ MainGame.prototype = {
 
         var animations_player1=[["left",[0,1,2,3],10,true],["right",[5,6,7,8],10,true]];
         player1 = new Player(1,160,game.world.height -150,'player',animations_player1,game);
-        melee1 = new MeleeWeapon(-14,-25,'meleeAttack',0,0,null,game);
+        melee1 = new MeleeWeapon(0,-25,'meleeAttack',0,0,null,game);
         setMeleeWeapon(player1, melee1);
+        //player.melee.object.anchor.setTo(0.5,0.5);
 
         var animations_player2=[["left",[0,1],5,true],["right",[2,3],5,true]];
         player2 = new Player(2,708,game.world.height -150,'player2',animations_player2,game);
@@ -124,18 +108,58 @@ MainGame.prototype = {
         p2upBtn = game.input.keyboard.addKey(Phaser.Keyboard.W);
         p2downBtn = game.input.keyboard.addKey(Phaser.Keyboard.S);
 		p2shoot = game.input.keyboard.addKey(Phaser.Keyboard.F);
-		
     },
 
     update: function() {
         game.physics.arcade.collide(player1.object,platforms);
         game.physics.arcade.collide(player2.object,platforms);
         game.physics.arcade.collide(player1.object,player2.object);
-        game.physics.arcade.overlap(player1.melee.object,player2.object,console.log("x"));
+
 
         player1.object.body.velocity.x = 0;
         player2.object.body.velocity.x = 0;
 
+        if(player1.melee.attackFrame > 0) player1attack();
+
+        function player1attack() {
+            if (player1.melee.attackFrameTimeout === 0) {
+                if (player1.melee.attackFrame === 0) {
+                    player1.melee.object.x = player1.melee.object.x + 32;
+                    player1.melee.object.y = player1.melee.object.y + 32;
+                    game.physics.arcade.overlap(player1.melee.object, player2.object, function () {
+                        kill(player2)
+                    });
+                    player1.melee.attackFrame = 1;
+                    player1.melee.attackFrameTimeout = 7;
+                } else if (player1.melee.attackFrame === 1) {
+                    player1.melee.object.x = player1.melee.object.x - 32;
+                    player1.melee.object.y = player1.melee.object.y - 32;
+                    game.physics.arcade.overlap(player1.melee.object, player2.object, function () {
+                        kill(player2)
+                    });
+                    player1.melee.attackFrame = 2;
+                    player1.melee.attackFrameTimeout = 7;
+                } else if (player1.melee.attackFrame === 2) {
+                    player1.melee.object.x = player1.melee.object.x - 32;
+                    player1.melee.object.y = player1.melee.object.y + 32;
+                    game.physics.arcade.overlap(player1.melee.object, player2.object, function () {
+                        kill(player2)
+                    });
+                    player1.melee.attackFrame = 3;
+                    player1.melee.attackFrameTimeout = 7;
+                } else if (player1.melee.attackFrame === 3) {
+                    player1.melee.object.x = player1.melee.object.x + 32;
+                    player1.melee.object.y = player1.melee.object.y - 32;
+                    game.physics.arcade.overlap(player1.melee.object, player2.object, function () {
+                        kill(player2)
+                    });
+                    player1.melee.attackFrame = 0;
+                    //player1.melee.attackFrameTimeout = 10;
+                }
+            } else if (player1.melee.attackFrameTimeout > 0) {
+                player1.melee.attackFrameTimeout--;
+            }
+        }
 
         if(p1cursors.left.isDown){
             player1.object.body.velocity.x = -150;
@@ -156,7 +180,7 @@ MainGame.prototype = {
         }
 
         if(p1cursors.down.isDown){
-            player1.melee.object.animations.play("meleeAttack");
+            player1attack();
         }
 		 
 
@@ -180,6 +204,10 @@ MainGame.prototype = {
 
         if(p2downBtn.isDown){
             player2.melee.object.animations.play("meleeAttack");
+        }
+
+        function kill(player){
+            player.object.kill();
         }
     }
 
