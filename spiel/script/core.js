@@ -4,8 +4,6 @@ function init() {
 
     game.state.add("MainGame", MainGame);
     game.state.start("MainGame");
-
-
 }
 
 //var cursors;
@@ -15,8 +13,6 @@ var players;
 var platforms;
 var ausgabe;
 var music;
-var p1doubleJump = false;
-var p2doubleJump = false;
 var hit;
 var lose;
 var loseplay = false;
@@ -27,7 +23,7 @@ var MainGame = function() {
 };
 
 function MeleeWeapon(x, y, sprite, damage, knockbackAmount, knockbackDirection, game){
-    this.object = players.create(x,y,sprite);
+    this.object = game.add.sprite(x,y,sprite);
     this.object.frame = 1;
     game.physics.arcade.enable(this.object);
     this.damage = damage;
@@ -44,7 +40,7 @@ function MeleeWeapon(x, y, sprite, damage, knockbackAmount, knockbackDirection, 
 
 function Player(id,x,y,sprite,animations,game) {
     this.id = id;
-    this.object = game.add.sprite(x,y,sprite);
+    this.object = players.create(x,y,sprite);
     game.physics.arcade.enable(this.object);
     this.object.body.gravity.y = 450;
     var self = this;
@@ -81,7 +77,7 @@ MainGame.prototype = {
         game.load.spritesheet('player','assets/dude.png',32,48);
         game.load.spritesheet('meleeAttack','assets/firstaid.png',32,32);
         game.load.spritesheet('projectile','assets/kugel.png');
-        game.load.spritesheet('player2','assets/baddie.png',32,32);
+        game.load.spritesheet('player2','assets/baddie.png',62.25,100);
         game.load.image('ground','assets/platform.png');
     },
 
@@ -107,6 +103,7 @@ MainGame.prototype = {
         setMeleeWeapon(player1, melee1);
         //player.object.melee.object.anchor.setTo(0.5,0.5);
         player1.object.weapon = createWeapon(20,'projectile',300,200,15,'player');
+        player1.object.direction = 'right';
         players.add(player1.object);
 
         var animations_player2=[["left",[0,1],5,true],["right",[2,3],5,true]];
@@ -114,6 +111,8 @@ MainGame.prototype = {
         melee2 = new MeleeWeapon(0,0,'meleeAttack',0,0,null,game);
         setMeleeWeapon(player2, melee2);
         player2.object.weapon = createWeapon(20,'projectile',300,200,15,'player2');
+        player2.object.scale.setTo(0.8,0.8);
+        player2.object.direction = 'left';
         players.add(player2.object);
 
         cursors = game.input.keyboard.createCursorKeys();
@@ -149,13 +148,14 @@ MainGame.prototype = {
         game.physics.arcade.collide(player1.object,platforms);
         game.physics.arcade.collide(player2.object,platforms);
         game.physics.arcade.collide(player1.object,player2.object);
-        //game.physics.arcade.collide(player1.weapon.bullets,player2.object,function(enemy,bullet){bullet.kill();});
-
-        //game.physics.arcade.collide(players.weapon.bullets,players.object,function(enemy,bullet){bullet.kill();});
-        //game.physics.arcade.collide(player2.weapon.bullets,player1.object,function(enemy,bullet){bullet.kill();});
-        //game.physics.arcade.collide(player1.weapon.bullets,player2.weapon.    bullets,function(bullet1, bullet2){bullet1.kill();bullet2.kill;});
 
         checkAttackCollision();
+
+        if(player2.object.direction === 'right'){
+            player2.object.anchor.setTo(0.5,0.5);
+        }else{
+            player2.object.anchor.setTo(0,0.5);
+        }
 
         //Spieler soll anhalten, sobald keine Richtungstaste gedrückt ist
         player1.object.body.velocity.x = 0;
@@ -209,11 +209,21 @@ MainGame.prototype = {
 
         if(p1cursors.left.isDown){
             player1.object.body.velocity.x = -150;
-            player1.object.animations.play('left');
+			if(player1.object.body.touching.down){
+				player1.object.animations.play('left');
+			}else{
+				player1.object.animations.stop();
+				player1.object.frame = 4;
+			}
             player1.object.direction = 'left';
         }else if(p1cursors.right.isDown){
             player1.object.body.velocity.x = 150;
-            player1.object.animations.play('right');
+            if(player1.object.body.touching.down){
+				player1.object.animations.play('right');
+			}else{
+				player1.object.animations.stop();
+				player1.object.frame = 4;
+			}
             player1.object.direction = 'right';
 
         }else{
@@ -221,14 +231,14 @@ MainGame.prototype = {
             player1.object.frame = 4;
         }
 
+        if(p1cursors.up.isDown && !player1.object.body.touching.down && player1.doubleJump === true){
+            player1.object.body.velocity.y = -350;
+            player1.doubleJump = false;
+        }
         if(p1cursors.up.isDown && player1.object.body.touching.down){
             player1.object.body.velocity.y = -350;
-			game.time.events.add(Phaser.Timer.SECOND * 1, function(){p1doubleJump = true} ,this);
+			game.time.events.add(Phaser.Timer.SECOND * 1, function(){player1.doubleJump = true} ,this);
         }
-		if(p1cursors.up.isDown && !player1.object.body.touching.down && p1doubleJump === true){
-		 	player1.object.body.velocity.y = -350;
-			p1doubleJump = false;
-		 }
 
         if(p1cursors.down.isDown){
            playerAttack(player1);
@@ -247,14 +257,15 @@ MainGame.prototype = {
             //player2.object.frame = 1;
         }
 
+
+        if(p2upBtn.isDown && !player2.object.body.touching.down && player2.doubleJump === true){
+            player2.object.body.velocity.y = -350;
+            player2.doubleJump  = false;
+        }
 		 if(p2upBtn.isDown && player2.object.body.touching.down){
 		 	player2.object.body.velocity.y = -350;
-		 	game.time.events.add(Phaser.Timer.SECOND * 1, function(){p2doubleJump = true},this);
+		 	game.time.events.add(Phaser.Timer.SECOND * 1, function(){player2.doubleJump = true},this);
         }
-		if(p2upBtn.isDown && !player2.object.body.touching.down && p2doubleJump === true){
-		 	player2.object.body.velocity.y = -350;
-			p2doubleJump = false;
-		 }
 
         if(p2downBtn.isDown){
            playerAttack(player2);
