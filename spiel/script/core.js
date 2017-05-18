@@ -78,13 +78,14 @@ MainGame.prototype = {
         game.load.spritesheet('meleeAttack','assets/firstaid.png',32,32);
         game.load.spritesheet('projectile','assets/kugel.png');
         game.load.spritesheet('player2','assets/baddie.png',62.25,100);
-        game.load.image('ground','assets/platform.png');
+        game.load.image('ground','assets/Mensa_Tisch.png');
+        game.load.image('background','assets/Mensa1.png');
     },
 
 
     create: function(){
         game.physics.startSystem(Phaser.Physics.ARCADE);
-		
+		background = game.add.sprite(0,0,'background');
 		//Sound
 		shoot = game.add.audio('shoot');
 		hit = game.add.audio('hit');
@@ -95,14 +96,14 @@ MainGame.prototype = {
 		music.loopFull(0.6);
 
         var animations_player1=[["left",[0,1,2,3],10,true],["right",[5,6,7,8],10,true]];
-        player1 = new Player(1,160,game.world.height -150,'player',animations_player1,game);
+        player1 = new Player(1,60,game.world.height -250,'player',animations_player1,game);
         melee1 = new MeleeWeapon(0,-25,'meleeAttack',0,0,null,game);
         setMeleeWeapon(player1, melee1);
         //player.melee.object.anchor.setTo(0.5,0.5);
         weaponPlayer1 = createWeapon(20,'projectile',300,200,15);
 		
         var animations_player2=[["left",[0,1],5,true],["right",[2,3],5,true]];
-        player2 = new Player(2,708,game.world.height -150,'player2',animations_player2,game);
+        player2 = new Player(2,300,game.world.height -250,'player2',animations_player2,game);
         melee2 = new MeleeWeapon(0,0,'meleeAttack',0,0,null,game);
         setMeleeWeapon(player2, melee2);
         weaponPlayer2 = createWeapon(20,'projectile',300,200,15);
@@ -113,7 +114,7 @@ MainGame.prototype = {
 
         platforms = game.add.group();
         platforms.enableBody = true;
-
+/*
         var ground = platforms.create(130,game.world.height - 35, 'ground');
         ground.scale.setTo(1.6,2);
         ground.body.immovable = true;
@@ -124,6 +125,9 @@ MainGame.prototype = {
 
         var pright = platforms.create(190,game.world.height - 285, 'ground');
         pright.scale.setTo(0.5,1);
+        pright.body.immovable = true;
+*/
+        var pright = platforms.create(45,game.world.height - 135, 'ground');
         pright.body.immovable = true;
 
         p1cursors = game.input.keyboard.createCursorKeys();
