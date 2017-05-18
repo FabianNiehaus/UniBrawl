@@ -59,7 +59,7 @@ function Player(id,x,y,sprite,animations,game) {
     this.object.direction = 'right';
 
     this.melee = null;
-    this.object.anchor.setTo(0.5,0.5);
+    
 }
 
 setMeleeWeapon = function(player, melee){
@@ -100,13 +100,15 @@ MainGame.prototype = {
         setMeleeWeapon(player1, melee1);
         //player.melee.object.anchor.setTo(0.5,0.5);
         weaponPlayer1 = createWeapon(20,'projectile',300,200,15);
-
+		
         var animations_player2=[["left",[0,1],5,true],["right",[2,3],5,true]];
         player2 = new Player(2,708,game.world.height -150,'player2',animations_player2,game);
         melee2 = new MeleeWeapon(0,0,'meleeAttack',0,0,null,game);
         setMeleeWeapon(player2, melee2);
         weaponPlayer2 = createWeapon(20,'projectile',300,200,15);
-
+		player2.object.scale.setTo(0.8,0.8);
+		player2.object.direction = 'left';
+		
         cursors = game.input.keyboard.createCursorKeys();
 
         platforms = game.add.group();
@@ -146,6 +148,11 @@ MainGame.prototype = {
         game.physics.arcade.collide(weaponPlayer2.bullets,platforms,function(bullet){bullet.kill();});
         game.physics.arcade.collide(weaponPlayer1.bullets,weaponPlayer2.bullets,function(bullet1, bullet2){bullet1.kill();bullet2.kill;});
 
+		if(player2.object.direction === 'right'){
+			player2.object.anchor.setTo(0.5,0.5);
+		}else{
+			player2.object.anchor.setTo(0,0.5);
+		}
         player1.object.body.velocity.x = 0;
         player2.object.body.velocity.x = 0;
 
@@ -195,11 +202,21 @@ MainGame.prototype = {
 
         if(p1cursors.left.isDown){
             player1.object.body.velocity.x = -150;
-            player1.object.animations.play('left');
+			if(player1.object.body.touching.down){
+				player1.object.animations.play('left');
+			}else{
+				player1.object.animations.stop();
+				player1.object.frame = 4;
+			}
             player1.object.direction = 'left';
         }else if(p1cursors.right.isDown){
             player1.object.body.velocity.x = 150;
-            player1.object.animations.play('right');
+            if(player1.object.body.touching.down){
+				player1.object.animations.play('right');
+			}else{
+				player1.object.animations.stop();
+				player1.object.frame = 4;
+			}
             player1.object.direction = 'right';
 
         }else{
