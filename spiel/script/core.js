@@ -19,6 +19,8 @@ var p2doubleJump = false;
 var hit;
 var lose;
 var loseplay = false;
+var weaponPlayer1;
+var weaponPlayer2;
 
 var MainGame = function() {
 
@@ -57,6 +59,7 @@ function Player(id,x,y,sprite,animations,game) {
     this.object.direction = 'right';
 
     this.melee = null;
+    this.object.anchor.setTo(0.5,0.5);
 }
 
 setMeleeWeapon = function(player, melee){
@@ -73,7 +76,7 @@ MainGame.prototype = {
 		game.load.audio('shoot', 'assets/shoot.wav');
         game.load.spritesheet('player','assets/dude.png',32,48);
         game.load.spritesheet('meleeAttack','assets/firstaid.png',32,32);
-        game.load.spritesheet('projectile','assets/firstaid.png');
+        game.load.spritesheet('projectile','assets/kugel.png');
         game.load.spritesheet('player2','assets/baddie.png',32,32);
         game.load.image('ground','assets/platform.png');
     },
@@ -96,11 +99,13 @@ MainGame.prototype = {
         melee1 = new MeleeWeapon(0,-25,'meleeAttack',0,0,null,game);
         setMeleeWeapon(player1, melee1);
         //player.melee.object.anchor.setTo(0.5,0.5);
+        weaponPlayer1 = createWeapon(20,'projectile',300,200,15);
 
         var animations_player2=[["left",[0,1],5,true],["right",[2,3],5,true]];
         player2 = new Player(2,708,game.world.height -150,'player2',animations_player2,game);
         melee2 = new MeleeWeapon(0,0,'meleeAttack',0,0,null,game);
         setMeleeWeapon(player2, melee2);
+        weaponPlayer2 = createWeapon(20,'projectile',300,200,15);
 
         cursors = game.input.keyboard.createCursorKeys();
 
@@ -135,7 +140,11 @@ MainGame.prototype = {
         game.physics.arcade.collide(player1.object,platforms);
         game.physics.arcade.collide(player2.object,platforms);
         game.physics.arcade.collide(player1.object,player2.object);
-
+        game.physics.arcade.collide(weaponPlayer1.bullets,player2.object,function(enemy,bullet){bullet.kill();});
+        game.physics.arcade.collide(weaponPlayer1.bullets,platforms,function(bullet){bullet.kill();});
+        game.physics.arcade.collide(weaponPlayer2.bullets,player1.object,function(enemy,bullet){bullet.kill();});
+        game.physics.arcade.collide(weaponPlayer2.bullets,platforms,function(bullet){bullet.kill();});
+        game.physics.arcade.collide(weaponPlayer1.bullets,weaponPlayer2.bullets,function(bullet1, bullet2){bullet1.kill();bullet2.kill;});
 
         player1.object.body.velocity.x = 0;
         player2.object.body.velocity.x = 0;
@@ -204,7 +213,7 @@ MainGame.prototype = {
             player1.object.body.velocity.y = -350;
 			game.time.events.add(Phaser.Timer.SECOND * 1, function(){p1doubleJump = true} ,this);
         }
-		if(p1cursors.up.isDown && !player1.object.body.touching.down && p1doubleJump == true){
+		if(p1cursors.up.isDown && !player1.object.body.touching.down && p1doubleJump === true){
 		 	player1.object.body.velocity.y = -350;
 			p1doubleJump = false;
 		 }
@@ -232,13 +241,33 @@ MainGame.prototype = {
 		 	player2.object.body.velocity.y = -350;
 		 	game.time.events.add(Phaser.Timer.SECOND * 1, function(){p2doubleJump = true},this);
         }
-		if(p2upBtn.isDown && !player2.object.body.touching.down && p2doubleJump == true){
+		if(p2upBtn.isDown && !player2.object.body.touching.down && p2doubleJump === true){
 		 	player2.object.body.velocity.y = -350;
 			p2doubleJump = false;
 		 }
 
         if(p2downBtn.isDown){
             player2.melee.object.animations.play("meleeAttack");
+        }
+
+        if (p1shoot.isDown)
+        {
+            if(player1.object.direction === 'right') {
+                weaponPlayer1.fire(player1.object, player1.object.x + 10, player1.object.y);
+            }
+            if(player1.object.direction === 'left') {
+                weaponPlayer1.fire(player1.object, player1.object.x - 10, player1.object.y);
+            }
+        }
+
+        if (p2shoot.isDown)
+        {
+            if(player2.object.direction === 'right') {
+                weaponPlayer2.fire(player2.object, player2.object.x + 10, player2.object.y);
+            }
+            if(player2.object.direction === 'left') {
+                weaponPlayer2.fire(player2.object, player2.object.x - 10, player2.object.y);
+            }
         }
 
         function kill(player){
@@ -248,7 +277,7 @@ MainGame.prototype = {
 		
 		if(player1.object.y > game.height + 50){
 			music.stop();
-			if(loseplay == false){
+			if(loseplay === false){
 				loseplay = true;
 				lose.play();
 			}
@@ -259,7 +288,7 @@ MainGame.prototype = {
 		}
 		if(player2.object.y > game.height + 50){
 			music.stop();
-			if(loseplay == false){
+			if(loseplay === false){
 				loseplay = true;
 				lose.play();
 			}
@@ -276,7 +305,7 @@ function respawnP1(){
 	loseplay = false;
 	player1.object.x = 160;
 	player1.object.y = game.world.height - 155;
-	player2.object.x = 708
+	player2.object.x = 708;
 	player2.object.y = game.world.height -155;
 	ausgabe.text = "";	
 	music.play();
@@ -285,10 +314,25 @@ function respawnP2(){
 	loseplay = false;
 	player1.object.x = 160;
 	player1.object.y = game.world.height - 155;
-	player2.object.x = 708
+	player2.object.x = 708;
 	player2.object.y = game.world.height -155;
 	ausgabe.text = "";
 	music.play();
+}
+
+function createWeapon(noOfBullets,spriteName,bulletSpeed,fireRate,gravityDown)
+{
+    //erstellt 20 "Kugeln" mit sprite projectile
+    weapon = game.add.weapon(noOfBullets, spriteName);
+    //automatisches killen, beim erreichen der Weltgrenze
+    weapon.bulletKillType = Phaser.Weapon.KILL_WORLD_BOUNDS;
+    weapon.bulletSpeed = bulletSpeed;
+    //Schussrate
+    weapon.fireRate = fireRate;
+    //schuss fängt beim Spieler Sprite an
+    weapon.trackSprite('player');
+    weapon.bulletGravity = new Phaser.Point(0, gravityDown);
+    return weapon;
 }
 
 
