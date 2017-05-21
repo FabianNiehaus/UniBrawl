@@ -6,7 +6,6 @@ function init() {
     game.state.start("MainGame");
 }
 
-//var cursors;
 var player1;
 var player2;
 var players;
@@ -41,8 +40,7 @@ function RangedWeapon(noOfBullets,spriteName,bulletSpeed,fireRate,gravityDown, t
 function MeleeWeapon(x, y, sprite, damage, knockbackAmount, knockbackDirection, game){
     //Erstellt Phaser-Objekt
     var melee = game.add.sprite(x,y,sprite);
-    //Setzt Frame auf neutrale Animation
-    melee.frame = 0;
+
     //Aktiviert Physik
     game.physics.arcade.enable(melee);
 
@@ -59,8 +57,50 @@ function MeleeWeapon(x, y, sprite, damage, knockbackAmount, knockbackDirection, 
 function Stuhl(x, y, game){
 
     var stuhl = new MeleeWeapon(x, y, 'stuhl', 5, 0.5,[-1,-1], game);
-    stuhl.animations.add("stuhl_attack_right",[0,1,2,3],2,false);
-    stuhl.animations.add("stuhl_attack_left",[0,1,2,3],2,false);
+
+    var stuhl_attack_right = stuhl.animations.add("stuhl_attack_right",[0,1,2,3,4,5,6],7,false);
+    stuhl_attack_right.enableUpdate = true;
+
+    //TODO Animationen für Schlagen fertigstellen
+
+    //Idle-Animation
+    stuhl.animations.add("idle",[0],9999999,true);
+    stuhl.animations.play("idle");
+
+    stuhl_attack_right.onStart.add(function(){
+        stuhl.x += 30;
+        stuhl.y += 20;
+    });
+
+    stuhl_attack_right.onUpdate.add(function () {
+
+        if (stuhl_attack_right.currentFrame.index === 0) {
+            stuhl.x += 30;
+            stuhl.y += 20;
+        } else if (stuhl_attack_right.currentFrame.index === 1) {
+            stuhl.x += 10;
+            stuhl.y += 5;
+            checkMeleeCollision();
+        } else if (stuhl_attack_right.currentFrame.index === 2) {
+            stuhl.x += 5;
+            stuhl.y += 35;
+            checkMeleeCollision();
+        } else if (stuhl_attack_right.currentFrame.index === 3) {
+            checkMeleeCollision();
+        } else if (stuhl_attack_right.currentFrame.index === 4) {
+            stuhl.x -= 5;
+            stuhl.y -= 35;
+            checkMeleeCollision();
+        } else if (stuhl_attack_right.currentFrame.index === 5) {
+            stuhl.x -= 10;
+            stuhl.y -= 5;
+            checkMeleeCollision();
+        } else if (stuhl_attack_right.currentFrame.index === 6) {
+            stuhl.x -= 30;
+            stuhl.y -= 20;
+        }
+    });
+
 
     return stuhl;
 }
@@ -97,6 +137,33 @@ setMeleeWeapon = function(player, melee){
     player.addChild(melee);
 };
 
+checkMeleeCollision = function(){
+
+    players.forEach(function(currentPlayer){
+
+        players.forEach(function(otherPlayer){
+            if(otherPlayer !== currentPlayer) {
+                game.physics.arcade.overlap(currentPlayer.melee, otherPlayer, function (melee, enemy) {
+                    enemy.kill();
+                });
+            }
+        });
+    });
+};
+
+checkRangedCollision = function(){
+    players.forEach(function(currentPlayer){
+
+        game.physics.arcade.collide(currentPlayer.weapon.bullets,platforms,function(bullet){bullet.kill();});
+
+        players.forEach(function(otherPlayer){
+            if(otherPlayer !== currentPlayer) {
+                game.physics.arcade.collide(currentPlayer.weapon.bullets,otherPlayer,function(enemy,bullet){bullet.kill();});
+            }
+        });
+    });
+};
+
 MainGame.prototype = {
 
     preload: function() {
@@ -108,7 +175,7 @@ MainGame.prototype = {
         game.load.spritesheet('meleeAttack','assets/firstaid.png',35,50);
         game.load.spritesheet('projectile','assets/kugel.png');
         game.load.spritesheet('player2','assets/baddie.png',62.25,100);
-        game.load.spritesheet('stuhl','assets/Stuhl_Attack_Right.png',57,58);
+        game.load.atlas('stuhl', 'assets/Stuhl_Attack_Right.png', 'assets/Stuhl_Attack_Right.json');
         game.load.image('ground','assets/Mensa_Tisch.png');
         game.load.image('background','assets/Mensa1.png');
     },
@@ -172,7 +239,7 @@ MainGame.prototype = {
         game.physics.arcade.collide(player2,platforms);
         game.physics.arcade.collide(player1,player2);
 
-        checkAttackCollision();
+        checkRangedCollision();
 
         if(player2.direction === 'right'){
             player2.anchor.setTo(0.5,0.5);
@@ -183,10 +250,6 @@ MainGame.prototype = {
         //Spieler soll anhalten, sobald keine Richtungstaste gedrückt ist
         player1.body.velocity.x = 0;
         player2.body.velocity.x = 0;
-
-        //
-        if(player1.melee.frame > 0) playerAttack(player1);
-        if(player2.melee.frame > 0) playerAttack(player2);
 
         if(p1cursors.left.isDown){
             player1.body.velocity.x = -150;
@@ -222,7 +285,7 @@ MainGame.prototype = {
         }
 
         if(p1cursors.down.isDown){
-            playerAttack(player1);
+            player1.melee.animations.play("stuhl_attack_right");
         }
 
         if(p2leftBtn.isDown){
@@ -238,7 +301,6 @@ MainGame.prototype = {
             //player2.frame = 1;
         }
 
-
         if(p2upBtn.isDown && !player2.body.touching.down && player2.doubleJump === true){
             player2.body.velocity.y = -350;
             player2.doubleJump  = false;
@@ -249,7 +311,7 @@ MainGame.prototype = {
         }
 
         if(p2downBtn.isDown){
-            playerAttack(player2);
+            player1.melee.animations.play("stuhl_attack_right");
         }
 
         if (p1shoot.isDown)
@@ -275,7 +337,6 @@ MainGame.prototype = {
             }
         }
 
-
         if(player1.y > game.height + 50){
             music.stop();
             if(loseplay === false){
@@ -298,63 +359,9 @@ MainGame.prototype = {
             game.time.events.add(Phaser.Timer.SECOND * 2, respawnP2,this);
 
         }
-
-        function checkAttackCollision(){
-            players.forEach(function(item){
-
-                var currentPlayer = item;
-
-                game.physics.arcade.collide(currentPlayer.weapon.bullets,platforms,function(bullet){bullet.kill();});
-
-                players.forEach(function(otherPlayer){
-                    if(otherPlayer !== currentPlayer) {
-                        game.physics.arcade.collide(currentPlayer.weapon.bullets,otherPlayer,function(enemy,bullet){bullet.kill();});
-                    }
-                });
-            });
-        }
-
-        function playerAttack(player) {
-            if (player.melee.attackFrameTimeout === 0) {
-                if (player.melee.frame === 0) {
-                    player.melee.x = player.melee.x + 30;
-                    player.melee.y = player.melee.y + 20;
-                    player.melee.frame = 1;
-                    player.melee.attackFrameTimeout = 5;
-                } else if (player.melee.frame === 1) {
-                    player.melee.x = player.melee.x + 10;
-                    player.melee.y = player.melee.y + 5;
-                    player.melee.frame= 2;
-                    player.melee.attackFrameTimeout = 5;
-                } else if (player.melee.frame === 2) {
-                    player.melee.x = player.melee.x + 5;
-                    player.melee.y = player.melee.y + 35;
-                    player.melee.frame = 3;
-                    player.melee.attackFrameTimeout = 5;
-                } else if (player.melee.frame === 3) {
-                    player.melee.x = player.melee.x - 45;
-                    player.melee.y = player.melee.y - 60;
-                    /*
-                     game.physics.arcade.overlap(player.melee, players, function () {
-                     if(player.id === 1){
-                     kill(player2);
-                     }
-                     if(player.id === 2){
-                     kill(player1);
-                     }
-                     });
-                     */
-                    player.melee.frame = 0;
-                    player.melee.attackFrameTimeout = 10;
-                }
-            } else if (player.melee.attackFrameTimeout > 0) {
-                player.melee.attackFrameTimeout--;
-            }
-        }
     }
-
-
 };
+
 function respawnP1(){
     loseplay = false;
     player1.x = 150;
