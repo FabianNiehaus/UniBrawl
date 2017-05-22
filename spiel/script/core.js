@@ -58,49 +58,70 @@ function Stuhl(x, y, game){
 
     var stuhl = new MeleeWeapon(x, y, 'stuhl', 5, 0.5,[-1,-1], game);
 
-    var stuhl_attack_right = stuhl.animations.add("stuhl_attack_right",[0,1,2,3,4,5,6],7,false);
-    stuhl_attack_right.enableUpdate = true;
+    stuhl.pivot.y = 70;
 
     //TODO Animationen für Schlagen fertigstellen
 
     //Idle-Animation
-    stuhl.animations.add("idle",[0],9999999,true);
-    stuhl.animations.play("idle");
+    var idle_right = stuhl.animations.add("idle_right",[1],1,true);
+    idle_right.onStart.add(function(){
+        stuhl.anchor.set(0,0);
+    });
+
+    var idle_left = stuhl.animations.add("idle_left",[0],1,true);
+    idle_left.onStart.add(function(){
+        stuhl.anchor.set(1,0);
+    });
+
+    var stuhl_attack_right = stuhl.animations.add("attack_right",[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],90,false);
+    stuhl_attack_right.enableUpdate = true;
+    stuhl_attack_right.step = 0;
 
     stuhl_attack_right.onStart.add(function(){
-        stuhl.x += 30;
-        stuhl.y += 20;
+        stuhl.anchor.set(0,0);
     });
 
     stuhl_attack_right.onUpdate.add(function () {
 
-        if (stuhl_attack_right.currentFrame.index === 0) {
-            stuhl.x += 30;
-            stuhl.y += 20;
-        } else if (stuhl_attack_right.currentFrame.index === 1) {
-            stuhl.x += 10;
-            stuhl.y += 5;
-            checkMeleeCollision();
-        } else if (stuhl_attack_right.currentFrame.index === 2) {
-            stuhl.x += 5;
-            stuhl.y += 35;
-            checkMeleeCollision();
-        } else if (stuhl_attack_right.currentFrame.index === 3) {
-            checkMeleeCollision();
-        } else if (stuhl_attack_right.currentFrame.index === 4) {
-            stuhl.x -= 5;
-            stuhl.y -= 35;
-            checkMeleeCollision();
-        } else if (stuhl_attack_right.currentFrame.index === 5) {
-            stuhl.x -= 10;
-            stuhl.y -= 5;
-            checkMeleeCollision();
-        } else if (stuhl_attack_right.currentFrame.index === 6) {
-            stuhl.x -= 30;
-            stuhl.y -= 20;
+        stuhl_attack_right.step ++;
+
+        if(stuhl_attack_right.step < 17){
+            stuhl.rotation += 0.15;
+        } else {
+            stuhl.rotation -= 0.15;
         }
     });
 
+    stuhl_attack_right.onComplete.add(function (){
+        stuhl.animations.play("idle_right");
+        stuhl_attack_right.step = 0;
+        stuhl.rotation = 0;
+    });
+
+    var stuhl_attack_left = stuhl.animations.add("attack_left",[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],90,false);
+    stuhl_attack_left.enableUpdate = true;
+    stuhl_attack_left.step = 0;
+
+    stuhl_attack_left.onStart.add(function(){
+        stuhl.anchor.set(1,0);
+    });
+
+    stuhl_attack_left.onUpdate.add(function () {
+
+        stuhl_attack_left.step ++;
+
+        if(stuhl_attack_left.step < 17){
+            stuhl.rotation -= 0.15;
+        } else {
+            stuhl.rotation += 0.15;
+        }
+    });
+
+    stuhl_attack_left.onComplete.add(function (){
+        stuhl.animations.play("idle_left");
+        stuhl_attack_left.step = 0;
+        stuhl.rotation = 0;
+    });
 
     return stuhl;
 }
@@ -139,15 +160,16 @@ setMeleeWeapon = function(player, melee){
 
 checkMeleeCollision = function(){
 
-    players.forEach(function(currentPlayer){
-
-        players.forEach(function(otherPlayer){
-            if(otherPlayer !== currentPlayer) {
-                game.physics.arcade.overlap(currentPlayer.melee, otherPlayer, function (melee, enemy) {
-                    enemy.kill();
-                });
-            }
-        });
+    players.forEach(function(currentPlayer) {
+        if (currentPlayer.melee.animations.currentAnim.name.match(/attack_*/)) {
+            players.forEach(function (otherPlayer) {
+                if (otherPlayer !== currentPlayer) {
+                    game.physics.arcade.overlap(currentPlayer.melee, otherPlayer, function (melee, enemy) {
+                        kill(enemy);
+                    });
+                }
+            });
+        }
     });
 };
 
@@ -164,6 +186,12 @@ checkRangedCollision = function(){
     });
 };
 
+kill = function(enemy){
+    enemy.weapon.destroy();
+    enemy.melee.kill();
+    enemy.kill();
+};
+
 MainGame.prototype = {
 
     preload: function() {
@@ -175,7 +203,7 @@ MainGame.prototype = {
         game.load.spritesheet('meleeAttack','assets/firstaid.png',35,50);
         game.load.spritesheet('projectile','assets/kugel.png');
         game.load.spritesheet('player2','assets/baddie.png',62.25,100);
-        game.load.atlas('stuhl', 'assets/Stuhl_Attack_Right.png', 'assets/Stuhl_Attack_Right.json');
+        game.load.spritesheet('stuhl', 'assets/Waffe1_Stuhl1_5.png',35,50);
         game.load.image('ground','assets/Mensa_Tisch.png');
         game.load.image('background','assets/Mensa1.png');
     },
@@ -200,17 +228,21 @@ MainGame.prototype = {
 
         var animations_player1=[["left",[0,1,2,3],10,true],["right",[5,6,7,8],10,true]];
         player1 = new Player(1,150,300,'player',animations_player1,game);
-        setMeleeWeapon(player1, new Stuhl(-30,-75,game));
-        //player.melee.anchor.setTo(0.5,0.5);
+        setMeleeWeapon(player1, new Stuhl(0,0,game));
+        player1.anchor.setTo(0.5,0.45);
         player1.weapon = RangedWeapon(20,'projectile',300,200,15,'player');
+        player1.melee.animations.play("idle_right");
         player1.direction = 'right';
         players.add(player1);
 
         var animations_player2=[["left",[0,1],5,true],["right",[2,3],5,true]];
         player2 = new Player(2,70,300,'player2',animations_player2,game);
-        setMeleeWeapon(player2, new Stuhl(0,-25,game));
+        setMeleeWeapon(player2, new Stuhl(0,0,game));
+        player2.anchor.setTo(0.5,0.2);
         player2.weapon = RangedWeapon(20,'projectile',300,200,15,'player2');
-        player2.scale.setTo(0.8,0.8);
+        //player2.scale.setTo(0.8,0.8);
+        //player2.melee.scale.setTo(1,1);
+        player2.melee.animations.play("idle_left");
         player2.direction = 'left';
         players.add(player2);
 
@@ -240,12 +272,7 @@ MainGame.prototype = {
         game.physics.arcade.collide(player1,player2);
 
         checkRangedCollision();
-
-        if(player2.direction === 'right'){
-            player2.anchor.setTo(0.5,0.5);
-        }else{
-            player2.anchor.setTo(0,0.5);
-        }
+        checkMeleeCollision();
 
         //Spieler soll anhalten, sobald keine Richtungstaste gedrückt ist
         player1.body.velocity.x = 0;
@@ -260,6 +287,9 @@ MainGame.prototype = {
                 player1.frame = 4;
             }
             player1.direction = 'left';
+            if(player1.melee.animations.currentAnim.name === "idle_right") {
+                player1.melee.animations.play("idle_left");
+            }
         }else if(p1cursors.right.isDown){
             player1.body.velocity.x = 150;
             if(player1.body.touching.down){
@@ -269,7 +299,9 @@ MainGame.prototype = {
                 player1.frame = 4;
             }
             player1.direction = 'right';
-
+            if(player1.melee.animations.currentAnim.name === "idle_left") {
+                player1.melee.animations.play("idle_right");
+            }
         }else{
             player1.animations.stop();
             player1.frame = 4;
@@ -285,17 +317,29 @@ MainGame.prototype = {
         }
 
         if(p1cursors.down.isDown){
-            player1.melee.animations.play("stuhl_attack_right");
+            if(player1.melee.animations.currentAnim.name.match(/idle_*/)) {
+                if (player1.direction === 'right') {
+                    player1.melee.animations.play("attack_right");
+                } else if (player1.direction === 'left') {
+                    player1.melee.animations.play("attack_left");
+                }
+            }
         }
 
         if(p2leftBtn.isDown){
             player2.body.velocity.x = -150;
             player2.animations.play('left');
             player2.direction = 'left';
+            if(player2.melee.animations.currentAnim.name === "idle_right") {
+                player2.melee.animations.play("idle_left");
+            }
         }else if(p2rightBtn.isDown){
             player2.body.velocity.x = 150;
             player2.animations.play('right');
             player2.direction = 'right';
+            if(player2.melee.animations.currentAnim.name === "idle_left") {
+                player2.melee.animations.play("idle_right");
+            }
         }else{
             player2.animations.stop();
             //player2.frame = 1;
@@ -311,7 +355,13 @@ MainGame.prototype = {
         }
 
         if(p2downBtn.isDown){
-            player1.melee.animations.play("stuhl_attack_right");
+            if(player2.melee.animations.currentAnim.name.match(/idle_*/)) {
+                if (player2.direction === 'right') {
+                    player2.melee.animations.play("attack_right");
+                } else if (player2.direction === 'left') {
+                    player2.melee.animations.play("attack_left");
+                }
+            }
         }
 
         if (p1shoot.isDown)
