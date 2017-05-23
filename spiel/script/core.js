@@ -204,8 +204,8 @@ MainGame.prototype = {
         game.load.spritesheet('projectile','assets/kugel.png');
         game.load.spritesheet('player2','assets/baddie.png',62.25,100);
         game.load.spritesheet('stuhl', 'assets/Waffe1_Stuhl1_5.png',35,50);
-        game.load.image('ground','assets/Mensa_Tisch.png');
-        game.load.image('background','assets/Mensa1.png');
+        game.load.image('ground','assets/Tisch2.png');
+        game.load.image('background','assets/Mensa2_klein.png');
     },
 
 
@@ -236,7 +236,7 @@ MainGame.prototype = {
         players.add(player1);
 
         var animations_player2=[["left",[0,1],5,true],["right",[2,3],5,true]];
-        player2 = new Player(2,70,300,'player2',animations_player2,game);
+        player2 = new Player(2,300,300,'player2',animations_player2,game);
         setMeleeWeapon(player2, new Stuhl(0,0,game));
         player2.anchor.setTo(0.5,0.2);
         player2.weapon = RangedWeapon(20,'projectile',300,200,15,'player2');
@@ -251,8 +251,9 @@ MainGame.prototype = {
         platforms = game.add.group();
         platforms.enableBody = true;
 
-        var ground = platforms.create(40,465,'ground');
+        var ground = platforms.create(134,553,'ground');
         ground.body.immovable = true;
+
 
         p1cursors = game.input.keyboard.createCursorKeys();
         p1shoot = game.input.keyboard.addKey(Phaser.Keyboard.M);
@@ -416,7 +417,7 @@ function respawnP1(){
     loseplay = false;
     player1.x = 150;
     player1.y = 300;
-    player2.x = 70;
+    player2.x = 250;
     player2.y = 300;
     ausgabe.text = "";
     music.play();
@@ -425,7 +426,7 @@ function respawnP2(){
     loseplay = false;
     player1.x = 150;
     player1.y = 300;
-    player2.x = 70;
+    player2.x = 300;
     player2.y = 300;
     ausgabe.text = "";
     music.play();
