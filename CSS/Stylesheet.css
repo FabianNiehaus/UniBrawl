@@ -2,6 +2,12 @@
 /* CSS Document */
 body{
 	background: #FFFAE2;
+
+}
+div{
+	display: flex;
+	justify-content: center;
+
 }
 
 h1{
