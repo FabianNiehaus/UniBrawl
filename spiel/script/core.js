@@ -205,6 +205,7 @@ MainGame.prototype = {
         game.load.spritesheet('player2','assets/baddie.png',62.25,100);
         game.load.spritesheet('stuhl', 'assets/Waffe1_Stuhl1_5.png',35,50);
         game.load.image('ground','assets/Tisch2.png');
+        game.load.image('ground2','assets/Tisch3.png');
         game.load.image('background','assets/Mensa2_klein.png');
     },
 
@@ -249,11 +250,12 @@ MainGame.prototype = {
         cursors = game.input.keyboard.createCursorKeys();
 
         platforms = game.add.group();
-        platforms.enableBody = true;
+        platforms.enableBody  = true;
 
         var ground = platforms.create(134,553,'ground');
         ground.body.immovable = true;
-
+        ground = platforms.create(683,425,'ground2');
+        ground.body.immovable = true;
 
         p1cursors = game.input.keyboard.createCursorKeys();
         p1shoot = game.input.keyboard.addKey(Phaser.Keyboard.M);
