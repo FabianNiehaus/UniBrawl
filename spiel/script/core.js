@@ -206,7 +206,7 @@ MainGame.prototype = {
         game.load.spritesheet('stuhl', 'assets/Waffe1_Stuhl1_5.png',35,50);
         game.load.image('ground','assets/world/Tisch2_2.png');
         game.load.image('ground2','assets/world/Tisch3.png');
-        game.load.image('background','assets/world/Mensa2_2_klein.png');
+        game.load.image('background','assets/world/Mensa2_3_klein.png');
     },
 
 
