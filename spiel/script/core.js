@@ -204,9 +204,9 @@ MainGame.prototype = {
         game.load.spritesheet('projectile','assets/kugel.png');
         game.load.spritesheet('player2','assets/baddie.png',62.25,100);
         game.load.spritesheet('stuhl', 'assets/Waffe1_Stuhl1_5.png',35,50);
-        game.load.image('ground','assets/Tisch2_2.png');
-        game.load.image('ground2','assets/Tisch3.png');
-        game.load.image('background','assets/Mensa2_2_klein.png');
+        game.load.image('ground','assets/world/Tisch2_2.png');
+        game.load.image('ground2','assets/world/Tisch3.png');
+        game.load.image('background','assets/world/Mensa2_2_klein.png');
     },
 
 
