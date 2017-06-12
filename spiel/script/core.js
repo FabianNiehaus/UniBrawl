@@ -304,6 +304,7 @@ MainGame.prototype = {
     update: function() {
         game.physics.arcade.collide(player1,platforms);
         game.physics.arcade.collide(player2,platforms);
+        game.physics.arcade.collide(player1,player2);
 
         players.forEach(function(currentPlayer){
             if(currentPlayer.isHit > -1){
@@ -359,16 +360,6 @@ MainGame.prototype = {
             }
         }
 
-        if(p1cursors.down.isDown){
-            if(player1.melee.animations.currentAnim.name.match(/idle_*/)) {
-                if (player1.direction === 'right') {
-                    player1.melee.animations.play("attack_right");
-                } else if (player1.direction === 'left') {
-                    player1.melee.animations.play("attack_left");
-                }
-            }
-        }
-
         if(player2.isHit === -1) {
             player2.body.velocity.x = 0;
 
@@ -395,13 +386,64 @@ MainGame.prototype = {
                 player2.body.velocity.y = -350;
                 player2.doubleJump  = false;
             }
-            if(p2upBtn.isDown && player2.body.touching.down){
+
+            if(p2upBtn.isDown &&
+                player2.body.touching.down){
                 player2.body.velocity.y = -350;
                 game.time.events.add(Phaser.Timer.SECOND * 1, function(){player2.doubleJump = true},this);
             }
         }
 
+        if(player1.y > game.height + 50){
+            music.stop();
+            if(loseplay === false){
+                loseplay = true;
+                lose.play();
+            }
+            ausgabe.text = "Spieler 1 hat die Runde verloren";
+            player2.y = -9000;
+            game.time.events.add(Phaser.Timer.SECOND * 2, respawnP1,this);
 
+        }
+        if(player2.y > game.height + 50){
+            music.stop();
+            if(loseplay === false){
+                loseplay = true;
+                lose.play();
+            }
+            ausgabe.text = "Spieler 2 hat die Runde verloren";
+            player1.y = -9000;
+            game.time.events.add(Phaser.Timer.SECOND * 2, respawnP2,this);
+        }
+
+
+        /*,function(player1,player2){
+            if(player1.body.center.x < player2.body.center.x) {
+                if(player1.direction === "right") {
+                    player1.body.velocity.x = 0;
+                }
+                if(player2.direction === "left"){
+                    player2.body.velocity.x = 0;
+                }
+            } else if (player1.body.center.x > player2.body.center.x) {
+                if (player1.direction === "left") {
+                    player1.body.velocity.x = 0;
+                }
+                if (player2.direction === "right") {
+                    player2.body.velocity.x = 0;
+                }
+            }
+        });*/
+
+        if(p1cursors.down.isDown){
+            if(player1.melee.animations.currentAnim.name.match(/idle_*/)) {
+                if (player1.direction === 'right') {
+                    player1.melee.animations.play("attack_right");
+                } else if (player1.direction === 'left') {
+                    player1.melee.animations.play("attack_left");
+                }
+            }
+        }
 
         if(p2downBtn.isDown){
             if(player2.melee.animations.currentAnim.name.match(/idle_*/)) {
@@ -435,47 +477,6 @@ MainGame.prototype = {
                 player.weapon.fire(player, player.x - 10, player.y);
             }
         }
-
-        if(player1.y > game.height + 50){
-            music.stop();
-            if(loseplay === false){
-                loseplay = true;
-                lose.play();
-            }
-            ausgabe.text = "Spieler 1 hat die Runde verloren";
-            player2.y = -9000;
-            game.time.events.add(Phaser.Timer.SECOND * 2, respawnP1,this);
-
-        }
-        if(player2.y > game.height + 50){
-            music.stop();
-            if(loseplay === false){
-                loseplay = true;
-                lose.play();
-            }
-            ausgabe.text = "Spieler 2 hat die Runde verloren";
-            player1.y = -9000;
-            game.time.events.add(Phaser.Timer.SECOND * 2, respawnP2,this);
-
-        }
-
-        game.physics.arcade.overlap(player1,player2,function(player1,player2){
-            if(player1.body.center.x < player2.body.center.x) {
-                if(player1.direction === "right") {
-                    player1.body.velocity.x = 0;
-                }
-                if(player2.direction === "left"){
-                    player2.body.velocity.x = 0;
-                }
-            } else if (player1.body.center.x > player2.body.center.x) {
-                if (player1.direction === "left") {
-                    player1.body.velocity.x = 0;
-                }
-                if (player2.direction === "right") {
-                    player2.body.velocity.x = 0;
-                }
-            }
-        });
 
     }
 };
