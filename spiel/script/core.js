@@ -240,6 +240,7 @@ MainGame.prototype = {
         game.load.image('ground','assets/world/Tisch2_2.png');
         game.load.image('ground2','assets/world/Tisch3.png');
         game.load.image('background','assets/world/Mensa2_3_klein.png');
+        game.load.image('ground3','assets/world/kasse.png');
     },
 
 
@@ -288,6 +289,8 @@ MainGame.prototype = {
         var ground = platforms.create(148,553,'ground');
         ground.body.immovable = true;
         ground = platforms.create(683,425,'ground2');
+        ground.body.immovable = true;
+        ground = platforms.create(14,344,'ground3');
         ground.body.immovable = true;
 
         p1cursors = game.input.keyboard.createCursorKeys();
