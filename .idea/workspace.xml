@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/spiel/script/core.js" line="271" mnemonic="7" />
+    <bookmark url="file://$PROJECT_DIR$/spiel/script/core.js" line="272" mnemonic="7" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d19df6b3-7e4d-4a41-897e-877c0e91dfca" name="Default" comment="" />
@@ -17,8 +17,8 @@
       <file leaf-file-name="core.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/spiel/script/core.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1925">
-              <caret line="77" column="43" lean-forward="true" selection-start-line="77" selection-start-column="43" selection-end-line="77" selection-end-column="43" />
+            <state relative-caret-position="711">
+              <caret line="292" column="52" lean-forward="true" selection-start-line="292" selection-start-column="52" selection-end-line="292" selection-end-column="52" />
               <folding />
             </state>
           </provider>
@@ -30,6 +30,8 @@
     <findStrings>
       <find>rangedWe</find>
       <find>knockback</find>
+      <find>tisch</find>
+      <find>ground</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -132,6 +134,68 @@
       </list>
     </option>
   </component>
+  <component name="RunManager">
+    <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
+      <method />
+    </configuration>
+    <configuration default="true" type="DartTestRunConfigurationType" factoryName="Dart Test">
+      <method />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerJest" factoryName="Jest">
+      <node-interpreter value="project" />
+      <working-dir value="" />
+      <envs />
+      <scope-kind value="ALL" />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma">
+      <config-file value="" />
+      <node-interpreter value="project" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerProtractor" factoryName="Protractor">
+      <config-file value="" />
+      <node-interpreter value="project" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
+      <method />
+    </configuration>
+    <configuration default="true" type="NodeJSConfigurationType" factoryName="Node.js" path-to-node="project" working-dir="">
+      <method />
+    </configuration>
+    <configuration default="true" type="cucumber.js" factoryName="Cucumber.js">
+      <option name="cucumberJsArguments" value="" />
+      <option name="executablePath" />
+      <option name="filePath" />
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.npm" factoryName="npm">
+      <command value="run" />
+      <scripts />
+      <node-interpreter value="project" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="mocha-javascript-test-runner" factoryName="Mocha">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <working-directory />
+      <pass-parent-env>true</pass-parent-env>
+      <envs />
+      <ui />
+      <extra-mocha-options />
+      <test-kind>DIRECTORY</test-kind>
+      <test-directory />
+      <recursive>false</recursive>
+      <method />
+    </configuration>
+  </component>
   <component name="ShelveChangesManager" show_recycled="false">
     <option name="remove_strategy" value="false" />
   </component>
@@ -145,12 +209,12 @@
       <workItem from="1495454549535" duration="727000" />
       <workItem from="1495455678515" duration="6239000" />
       <workItem from="1496132452175" duration="39000" />
-      <workItem from="1497268048729" duration="4548000" />
+      <workItem from="1497268048729" duration="6546000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="11553000" />
+    <option name="totallyTimeSpent" value="13551000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-11" y="-11" width="2182" height="1368" extended-state="6" />
@@ -250,8 +314,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/spiel/script/core.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1925">
-          <caret line="77" column="43" lean-forward="true" selection-start-line="77" selection-start-column="43" selection-end-line="77" selection-end-column="43" />
+        <state relative-caret-position="711">
+          <caret line="292" column="52" lean-forward="true" selection-start-line="292" selection-start-column="52" selection-end-line="292" selection-end-column="52" />
           <folding />
         </state>
       </provider>
