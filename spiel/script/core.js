@@ -304,7 +304,6 @@ MainGame.prototype = {
     update: function() {
         game.physics.arcade.collide(player1,platforms);
         game.physics.arcade.collide(player2,platforms);
-        game.physics.arcade.collide(player1,player2);
 
         players.forEach(function(currentPlayer){
             if(currentPlayer.isHit > -1){
@@ -459,6 +458,25 @@ MainGame.prototype = {
             game.time.events.add(Phaser.Timer.SECOND * 2, respawnP2,this);
 
         }
+
+        game.physics.arcade.overlap(player1,player2,function(player1,player2){
+            if(player1.body.center.x < player2.body.center.x) {
+                if(player1.direction === "right") {
+                    player1.body.velocity.x = 0;
+                }
+                if(player2.direction === "left"){
+                    player2.body.velocity.x = 0;
+                }
+            } else if (player1.body.center.x > player2.body.center.x) {
+                if (player1.direction === "left") {
+                    player1.body.velocity.x = 0;
+                }
+                if (player2.direction === "right") {
+                    player2.body.velocity.x = 0;
+                }
+            }
+        });
+
     }
 };
 
