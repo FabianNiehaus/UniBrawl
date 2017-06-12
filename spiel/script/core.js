@@ -20,7 +20,7 @@ var MainGame = function() {
 
 };
 
-function RangedWeapon(noOfBullets,spriteName,bulletSpeed,fireRate,gravityDown, trackedSpriteName)
+function RangedWeapon(noOfBullets,spriteName,bulletSpeed,fireRate,gravityDown, trackedSpriteName, knockbackAmount)
 {
     //erstellt 20 "Kugeln" mit sprite projectile
     var weapon = game.add.weapon(noOfBullets, spriteName);
@@ -33,6 +33,7 @@ function RangedWeapon(noOfBullets,spriteName,bulletSpeed,fireRate,gravityDown, t
     weapon.trackSprite(trackedSpriteName);
     weapon.bulletGravity = new Phaser.Point(0, gravityDown);
     //weapon.autofire = true;
+    weapon.knockbackAmount = knockbackAmount;
 
     return weapon;
 }
@@ -263,7 +264,7 @@ MainGame.prototype = {
         player1 = new Player(1,150,300,'player',animations_player1,game);
         setMeleeWeapon(player1, new Stuhl(0,0,game));
         player1.anchor.setTo(0.5,0.45);
-        player1.weapon = RangedWeapon(20,'projectile',300,200,15,'player');
+        player1.weapon = RangedWeapon(20,'projectile',300,200,15,'player',150);
         player1.melee.animations.play("idle_right");
         player1.direction = 'right';
         players.add(player1);
@@ -272,7 +273,7 @@ MainGame.prototype = {
         player2 = new Player(2,300,300,'player2',animations_player2,game);
         setMeleeWeapon(player2, new Stuhl(0,0,game));
         player2.anchor.setTo(0.5,0.2);
-        player2.weapon = RangedWeapon(20,'projectile',300,200,15,'player2');
+        player2.weapon = RangedWeapon(20,'projectile',300,200,15,'player2',150);
         //player2.scale.setTo(0.8,0.8);
         //player2.melee.scale.setTo(1,1);
         player2.melee.animations.play("idle_left");
