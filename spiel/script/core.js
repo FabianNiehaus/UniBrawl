@@ -20,25 +20,26 @@ var MainGame = function() {
 
 };
 
-function RangedWeapon(noOfBullets,spriteName,bulletSpeed,fireRate,gravityDown, trackedSpriteName, knockbackAmount)
+function RangedWeapon(noOfBullets, spriteName, bulletSpeed, fireRate, gravityDown, trackedSpriteName, knockbackAmount, hitTimeout, game)
 {
     //erstellt 20 "Kugeln" mit sprite projectile
-    var weapon = game.add.weapon(noOfBullets, spriteName);
+    var ranged = game.add.weapon(noOfBullets, spriteName);
     //automatisches killen, beim erreichen der Weltgrenze
-    weapon.bulletKillType = Phaser.Weapon.KILL_WORLD_BOUNDS;
-    weapon.bulletSpeed = bulletSpeed;
+    ranged.bulletKillType = Phaser.Weapon.KILL_WORLD_BOUNDS;
+    ranged.bulletSpeed = bulletSpeed;
     //Schussrate
-    weapon.fireRate = fireRate;
+    ranged.fireRate = fireRate;
     //schuss fängt beim Spieler Sprite an
-    weapon.trackSprite(trackedSpriteName);
-    weapon.bulletGravity = new Phaser.Point(0, gravityDown);
+    ranged.trackSprite(trackedSpriteName);
+    ranged.bulletGravity = new Phaser.Point(0, gravityDown);
     //weapon.autofire = true;
-    weapon.knockbackAmount = knockbackAmount;
+    ranged.knockbackAmount = knockbackAmount;
+    ranged.hitTimeout = hitTimeout;
 
-    return weapon;
+    return ranged;
 }
 
-function MeleeWeapon(x, y, sprite, damage, knockbackAmount, knockbackDirection, game){
+function MeleeWeapon(x, y, sprite, damage, knockbackAmount, knockbackDirection, hitTimeout, game) {
     //Erstellt Phaser-Objekt
     var melee = game.add.sprite(x,y,sprite);
 
@@ -49,6 +50,7 @@ function MeleeWeapon(x, y, sprite, damage, knockbackAmount, knockbackDirection, 
     melee.damage = damage;
     melee.knockbackAmount = knockbackAmount;
     melee.knockbackDirection = knockbackDirection;
+    melee.hitTimeout = hitTimeout;
 
     melee.attackFrameTimeout = 0;
 
@@ -57,7 +59,7 @@ function MeleeWeapon(x, y, sprite, damage, knockbackAmount, knockbackDirection, 
 
 function Stuhl(x, y, game){
 
-    var stuhl = new MeleeWeapon(x, y, 'stuhl', 5, 150,[-1,-1], game);
+    var stuhl = new MeleeWeapon(x, y, 'stuhl', 5, 150, [-1, -1], 50, game);
 
     stuhl.pivot.y = 70;
 
@@ -170,8 +172,12 @@ checkMeleeCollision = function(){
                     game.physics.arcade.overlap(currentPlayer.melee, otherPlayer, function (melee, enemy) {
                         if(currentPlayer.body.center.x > enemy.body.center.x){
                             getHit(enemy,melee,"left");
+                            console.log("Melee: " + (currentPlayer.melee.body.center.x - Math.sqrt(Math.pow(currentPlayer.melee.body.width, 2) + Math.pow(currentPlayer.melee.body.height, 2))));
+                            console.log("Player: " + (otherPlayer.body.center.x + otherPlayer.body.width / 2));
                         } else if (currentPlayer.body.center.x < enemy.body.center.x){
                             getHit(enemy,melee,"right");
+                            console.log("Melee: " + (currentPlayer.melee.body.center.x + Math.sqrt(Math.pow(currentPlayer.melee.body.width, 2) + Math.pow(currentPlayer.melee.body.height, 2))));
+                            console.log("Player: " + (otherPlayer.body.center.x - otherPlayer.body.width / 2));
                         }
                     });
                 }
@@ -187,7 +193,15 @@ checkRangedCollision = function(){
 
         players.forEach(function(otherPlayer){
             if(otherPlayer !== currentPlayer) {
-                game.physics.arcade.collide(currentPlayer.weapon.bullets,otherPlayer,function(enemy,bullet){bullet.kill();});
+
+                game.physics.arcade.overlap(currentPlayer.weapon.bullets, otherPlayer, function (enemy, bullet) {
+                    if (currentPlayer.body.center.x > enemy.body.center.x) {
+                        getHit(enemy, currentPlayer.weapon, "left");
+                    } else if (currentPlayer.body.center.x < enemy.body.center.x) {
+                        getHit(enemy, currentPlayer.weapon, "right");
+                    }
+                    bullet.kill();
+                });
             }
         });
     });
@@ -201,7 +215,7 @@ kill = function(enemy){
 
 getHit = function(player, weapon, direction) {
     if (player.isHit === -1) {
-        player.isHit = 50;
+        player.isHit = weapon.hitTimeout;
 
         if (direction === "left") {
             /*
@@ -223,7 +237,7 @@ getHit = function(player, weapon, direction) {
             player.body.velocity.x = weapon.knockbackAmount;
         }
     }
-}
+};
 
 MainGame.prototype = {
 
@@ -265,7 +279,7 @@ MainGame.prototype = {
         player1 = new Player(1,150,300,'player',animations_player1,game);
         setMeleeWeapon(player1, new Stuhl(0,0,game));
         player1.anchor.setTo(0.5,0.45);
-        player1.weapon = RangedWeapon(20,'projectile',300,200,15,'player',150);
+        player1.weapon = RangedWeapon(20, 'projectile', 300, 200, 15, 'player', 50, 10, game);
         player1.melee.animations.play("idle_right");
         player1.direction = 'right';
         players.add(player1);
@@ -274,7 +288,7 @@ MainGame.prototype = {
         player2 = new Player(2,300,300,'player2',animations_player2,game);
         setMeleeWeapon(player2, new Stuhl(0,0,game));
         player2.anchor.setTo(0.5,0.2);
-        player2.weapon = RangedWeapon(20,'projectile',300,200,15,'player2',150);
+        player2.weapon = RangedWeapon(20, 'projectile', 300, 200, 15, 'player2', 50, 10, game);
         //player2.scale.setTo(0.8,0.8);
         //player2.melee.scale.setTo(1,1);
         player2.melee.animations.play("idle_left");
