@@ -1,7 +1,10 @@
 12.06.2017
 - Hitbox Melee / Charaktere fixen (Spriteatlas für Charaktere!)
 - Anker / Animation Melee (Waffen in der Hand und nicht über Kopf)
-- Tod bei Verlassen der Map in jede Richtung
-- Schadensmodell + Knockback schadensabhängig
-- Anzeige Leben, Schaden
-- Restart / Respawn fixen
++ Tod bei Verlassen der Map in jede Richtung
++ Schadensmodell + Knockback schadensabhängig
+- Anzeige Leben, + Schaden
++ Restart / Respawn fixen
++ Lockout Time Knockback
++ Startmenü
++ Parabel Knockback
