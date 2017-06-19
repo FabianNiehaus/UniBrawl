@@ -302,11 +302,11 @@ MainGame.prototype = {
         player2.melee.animations.play("idle_left");
         player2.direction = 'left';
         players.add(player2);
-        player2.health = 10;
+        player2.health = 200;
         player2.maxHealth = 300;
         player2HealthMeter = game.add.plugin(Phaser.Plugin.HealthMeter);
         player2HealthMeter.text(
-            player1,
+            player2,
             {x: game.world.width - 120, y: 43, width: 100, height: 20}
         );
 

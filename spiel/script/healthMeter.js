@@ -34,6 +34,7 @@ Phaser.Plugin.HealthMeter = function(game, parent) {
     this.options.font = {
             font: "20px monospace",
             fill: "#fff"
+            //fill: this.setFarbe()
         };
 
     this.options.foreground = '#00ff00';
@@ -51,6 +52,7 @@ Phaser.Plugin.HealthMeter.prototype._setupOptions = function(options) {
         }
     }
 };
+
 
 Phaser.Plugin.HealthMeter.prototype.text = function(char) {
     this.char = char;
@@ -113,9 +115,13 @@ Phaser.Plugin.HealthMeter.prototype.update = function() {
 };
 
 Phaser.Plugin.HealthMeter.prototype.updateText = function() {
-
+    fontHealthText = {
+        font: "20px monospace",
+        //fill: "#fff"
+        fill: this.setFarbe()
+    };
     if (!this.healthText) {
-        this.healthText = this.game.add.text(this.options.x, this.options.y, this.healthPrint(), this.options.font);
+        this.healthText = this.game.add.text(this.options.x, this.options.y, this.healthPrint(), fontHealthText);
         this.healthText.fixedToCamera = true;
     }
 
@@ -208,7 +214,19 @@ Phaser.Plugin.HealthMeter.prototype.updateIcons = function() {
     }
 };
 
-
 Phaser.Plugin.HealthMeter.prototype.healthPrint = function() {
-    return this.char.health + ' / ' + this.char.maxHealth;
+    return this.char.health + ' % ';
+};
+
+
+Phaser.Plugin.HealthMeter.prototype.setFarbe = function() {
+    if(this.char.health <= 100){
+        return "#31B404";   //grün
+    } else if(this.char.health > 100 && this.char.health <= 170) {
+        return "#D7DF01";   //gelb
+    } else if(this.char.health > 175 && this.char.health <= 250) {
+        return "#DBA901";   //orange
+    } else if(this.char.health > 250) {
+        return "#DF0101";   //rot
+    }
 };
