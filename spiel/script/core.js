@@ -20,25 +20,26 @@ var MainGame = function() {
 
 };
 
-function RangedWeapon(noOfBullets,spriteName,bulletSpeed,fireRate,gravityDown, trackedSpriteName, knockbackAmount)
+function RangedWeapon(noOfBullets, spriteName, bulletSpeed, fireRate, gravityDown, trackedSpriteName, knockbackAmount, hitTimeout, game)
 {
     //erstellt 20 "Kugeln" mit sprite projectile
-    var weapon = game.add.weapon(noOfBullets, spriteName);
+    var ranged = game.add.weapon(noOfBullets, spriteName);
     //automatisches killen, beim erreichen der Weltgrenze
-    weapon.bulletKillType = Phaser.Weapon.KILL_WORLD_BOUNDS;
-    weapon.bulletSpeed = bulletSpeed;
+    ranged.bulletKillType = Phaser.Weapon.KILL_WORLD_BOUNDS;
+    ranged.bulletSpeed = bulletSpeed;
     //Schussrate
-    weapon.fireRate = fireRate;
+    ranged.fireRate = fireRate;
     //schuss fängt beim Spieler Sprite an
-    weapon.trackSprite(trackedSpriteName);
-    weapon.bulletGravity = new Phaser.Point(0, gravityDown);
+    ranged.trackSprite(trackedSpriteName);
+    ranged.bulletGravity = new Phaser.Point(0, gravityDown);
     //weapon.autofire = true;
-    weapon.knockbackAmount = knockbackAmount;
+    ranged.knockbackAmount = knockbackAmount;
+    ranged.hitTimeout = hitTimeout;
 
-    return weapon;
+    return ranged;
 }
 
-function MeleeWeapon(x, y, sprite, damage, knockbackAmount, knockbackDirection, game){
+function MeleeWeapon(x, y, sprite, damage, knockbackAmount, knockbackDirection, hitTimeout, game) {
     //Erstellt Phaser-Objekt
     var melee = game.add.sprite(x,y,sprite);
 
@@ -49,6 +50,7 @@ function MeleeWeapon(x, y, sprite, damage, knockbackAmount, knockbackDirection, 
     melee.damage = damage;
     melee.knockbackAmount = knockbackAmount;
     melee.knockbackDirection = knockbackDirection;
+    melee.hitTimeout = hitTimeout;
 
     melee.attackFrameTimeout = 0;
 
@@ -57,7 +59,7 @@ function MeleeWeapon(x, y, sprite, damage, knockbackAmount, knockbackDirection, 
 
 function Stuhl(x, y, game){
 
-    var stuhl = new MeleeWeapon(x, y, 'stuhl', 5, 150,[-1,-1], game);
+    var stuhl = new MeleeWeapon(x, y, 'stuhl', 5, 150, [-1, -1], 50, game);
 
     stuhl.pivot.y = 70;
 
@@ -170,8 +172,12 @@ checkMeleeCollision = function(){
                     game.physics.arcade.overlap(currentPlayer.melee, otherPlayer, function (melee, enemy) {
                         if(currentPlayer.body.center.x > enemy.body.center.x){
                             getHit(enemy,melee,"left");
+                            console.log("Melee: " + (currentPlayer.melee.body.center.x - Math.sqrt(Math.pow(currentPlayer.melee.body.width, 2) + Math.pow(currentPlayer.melee.body.height, 2))));
+                            console.log("Player: " + (otherPlayer.body.center.x + otherPlayer.body.width / 2));
                         } else if (currentPlayer.body.center.x < enemy.body.center.x){
                             getHit(enemy,melee,"right");
+                            console.log("Melee: " + (currentPlayer.melee.body.center.x + Math.sqrt(Math.pow(currentPlayer.melee.body.width, 2) + Math.pow(currentPlayer.melee.body.height, 2))));
+                            console.log("Player: " + (otherPlayer.body.center.x - otherPlayer.body.width / 2));
                         }
                     });
                 }
@@ -187,7 +193,15 @@ checkRangedCollision = function(){
 
         players.forEach(function(otherPlayer){
             if(otherPlayer !== currentPlayer) {
-                game.physics.arcade.collide(currentPlayer.weapon.bullets,otherPlayer,function(enemy,bullet){bullet.kill();});
+
+                game.physics.arcade.overlap(currentPlayer.weapon.bullets, otherPlayer, function (enemy, bullet) {
+                    if (currentPlayer.body.center.x > enemy.body.center.x) {
+                        getHit(enemy, currentPlayer.weapon, "left");
+                    } else if (currentPlayer.body.center.x < enemy.body.center.x) {
+                        getHit(enemy, currentPlayer.weapon, "right");
+                    }
+                    bullet.kill();
+                });
             }
         });
     });
@@ -201,7 +215,7 @@ kill = function(enemy){
 
 getHit = function(player, weapon, direction) {
     if (player.isHit === -1) {
-        player.isHit = 50;
+        player.isHit = weapon.hitTimeout;
 
         if (direction === "left") {
             /*
@@ -223,7 +237,7 @@ getHit = function(player, weapon, direction) {
             player.body.velocity.x = weapon.knockbackAmount;
         }
     }
-}
+};
 
 MainGame.prototype = {
 
@@ -235,7 +249,7 @@ MainGame.prototype = {
         game.load.spritesheet('player','assets/dude.png',32,48);
         game.load.spritesheet('meleeAttack','assets/firstaid.png',35,50);
         game.load.spritesheet('projectile','assets/kugel.png');
-        game.load.spritesheet('player2','assets/baddie.png',62.25,100);
+        game.load.spritesheet('player2','assets/Mathis_V2.png',62.25,100);
         game.load.spritesheet('stuhl', 'assets/Waffe1_Stuhl1_5.png',35,50);
         game.load.image('ground','assets/world/Tisch2_2.png');
         game.load.image('ground2','assets/world/Tisch3.png');
@@ -265,7 +279,7 @@ MainGame.prototype = {
         player1 = new Player(1,150,300,'player',animations_player1,game);
         setMeleeWeapon(player1, new Stuhl(0,0,game));
         player1.anchor.setTo(0.5,0.45);
-        player1.weapon = RangedWeapon(20,'projectile',300,200,15,'player',150);
+        player1.weapon = RangedWeapon(20, 'projectile', 300, 200, 15, 'player', 50, 10, game);
         player1.melee.animations.play("idle_right");
         player1.direction = 'right';
         players.add(player1);
@@ -282,7 +296,7 @@ MainGame.prototype = {
         player2 = new Player(2,300,300,'player2',animations_player2,game);
         setMeleeWeapon(player2, new Stuhl(0,0,game));
         player2.anchor.setTo(0.5,0.2);
-        player2.weapon = RangedWeapon(20,'projectile',300,200,15,'player2',150);
+        player2.weapon = RangedWeapon(20, 'projectile', 300, 200, 15, 'player2', 50, 10, game);
         //player2.scale.setTo(0.8,0.8);
         //player2.melee.scale.setTo(1,1);
         player2.melee.animations.play("idle_left");
@@ -323,6 +337,7 @@ MainGame.prototype = {
     update: function() {
         game.physics.arcade.collide(player1,platforms);
         game.physics.arcade.collide(player2,platforms);
+        game.physics.arcade.collide(player1,player2);
 
         players.forEach(function(currentPlayer){
             if(currentPlayer.isHit > -1){
@@ -378,16 +393,6 @@ MainGame.prototype = {
             }
         }
 
-        if(p1cursors.down.isDown){
-            if(player1.melee.animations.currentAnim.name.match(/idle_*/)) {
-                if (player1.direction === 'right') {
-                    player1.melee.animations.play("attack_right");
-                } else if (player1.direction === 'left') {
-                    player1.melee.animations.play("attack_left");
-                }
-            }
-        }
-
         if(player2.isHit === -1) {
             player2.body.velocity.x = 0;
 
@@ -414,13 +419,64 @@ MainGame.prototype = {
                 player2.body.velocity.y = -350;
                 player2.doubleJump  = false;
             }
-            if(p2upBtn.isDown && player2.body.touching.down){
+
+            if(p2upBtn.isDown &&
+                player2.body.touching.down){
                 player2.body.velocity.y = -350;
                 game.time.events.add(Phaser.Timer.SECOND * 1, function(){player2.doubleJump = true},this);
             }
         }
 
+        if(player1.y > game.height + 50){
+            music.stop();
+            if(loseplay === false){
+                loseplay = true;
+                lose.play();
+            }
+            ausgabe.text = "Spieler 1 hat die Runde verloren";
+            player2.y = -9000;
+            game.time.events.add(Phaser.Timer.SECOND * 2, respawnP1,this);
 
+        }
+        if(player2.y > game.height + 50){
+            music.stop();
+            if(loseplay === false){
+                loseplay = true;
+                lose.play();
+            }
+            ausgabe.text = "Spieler 2 hat die Runde verloren";
+            player1.y = -9000;
+            game.time.events.add(Phaser.Timer.SECOND * 2, respawnP2,this);
+        }
+
+
+        /*,function(player1,player2){
+            if(player1.body.center.x < player2.body.center.x) {
+                if(player1.direction === "right") {
+                    player1.body.velocity.x = 0;
+                }
+                if(player2.direction === "left"){
+                    player2.body.velocity.x = 0;
+                }
+            } else if (player1.body.center.x > player2.body.center.x) {
+                if (player1.direction === "left") {
+                    player1.body.velocity.x = 0;
+                }
+                if (player2.direction === "right") {
+                    player2.body.velocity.x = 0;
+                }
+            }
+        });*/
+
+        if(p1cursors.down.isDown){
+            if(player1.melee.animations.currentAnim.name.match(/idle_*/)) {
+                if (player1.direction === 'right') {
+                    player1.melee.animations.play("attack_right");
+                } else if (player1.direction === 'left') {
+                    player1.melee.animations.play("attack_left");
+                }
+            }
+        }
 
         if(p2downBtn.isDown){
             if(player2.melee.animations.currentAnim.name.match(/idle_*/)) {
@@ -454,47 +510,6 @@ MainGame.prototype = {
                 player.weapon.fire(player, player.x - 10, player.y);
             }
         }
-
-        if(player1.y > game.height + 50){
-            music.stop();
-            if(loseplay === false){
-                loseplay = true;
-                lose.play();
-            }
-            ausgabe.text = "Spieler 1 hat die Runde verloren";
-            player2.y = -9000;
-            game.time.events.add(Phaser.Timer.SECOND * 2, respawnP1,this);
-
-        }
-        if(player2.y > game.height + 50){
-            music.stop();
-            if(loseplay === false){
-                loseplay = true;
-                lose.play();
-            }
-            ausgabe.text = "Spieler 2 hat die Runde verloren";
-            player1.y = -9000;
-            game.time.events.add(Phaser.Timer.SECOND * 2, respawnP2,this);
-
-        }
-
-        game.physics.arcade.overlap(player1,player2,function(player1,player2){
-            if(player1.body.center.x < player2.body.center.x) {
-                if(player1.direction === "right") {
-                    player1.body.velocity.x = 0;
-                }
-                if(player2.direction === "left"){
-                    player2.body.velocity.x = 0;
-                }
-            } else if (player1.body.center.x > player2.body.center.x) {
-                if (player1.direction === "left") {
-                    player1.body.velocity.x = 0;
-                }
-                if (player2.direction === "right") {
-                    player2.body.velocity.x = 0;
-                }
-            }
-        });
 
     }
 };
