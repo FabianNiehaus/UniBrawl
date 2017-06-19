@@ -34,7 +34,6 @@ Phaser.Plugin.HealthMeter = function(game, parent) {
     this.options.font = {
             font: "20px monospace",
             fill: "#fff"
-            //fill: this.setFarbe()
         };
 
     this.options.foreground = '#00ff00';
@@ -116,8 +115,7 @@ Phaser.Plugin.HealthMeter.prototype.update = function() {
 
 Phaser.Plugin.HealthMeter.prototype.updateText = function() {
     fontHealthText = {
-        font: "20px monospace",
-        //fill: "#fff"
+        font: "28px monospace",
         fill: this.setFarbe()
     };
     if (!this.healthText) {
