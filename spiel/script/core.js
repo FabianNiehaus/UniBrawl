@@ -3,7 +3,9 @@ function init() {
     game = new Phaser.Game(900,600,Phaser.canvas,'',null,false,false);
 
     game.state.add("MainGame", MainGame);
+	game.state.add("spielstart", MainGame.prototype);
     game.state.start("MainGame");
+	
 }
 
 var player1;
@@ -16,8 +18,19 @@ var hit;
 var lose;
 var loseplay = false;
 
-var MainGame = function() {
-
+var MainGame = {
+	preload : function(){
+		game.load.image('background','assets/loadingscreen.png');
+		game.load.image('startButton', 'assets/startButton.png');
+	},
+	create : function(){
+		game.add.tileSprite(0, 0, 900, 600, 'background');
+		var startButton = game.add.button(200, 400,'startButton',this.start,this,2,1,0);
+	},
+	
+	start : function(){
+		game.state.start('spielstart');
+	}
 };
 
 function RangedWeapon(noOfBullets, spriteName, bulletSpeed, fireRate, gravityDown, trackedSpriteName, knockbackAmount, hitTimeout, game)
@@ -268,15 +281,16 @@ MainGame.prototype = {
         hit = game.add.audio('hit');
         music = game.add.audio('music');
         lose = game.add.audio('lose');
-        music.play();
-        music.volume = 0.7;
-        music.loopFull(0.6);
+        //music.play();
+        //music.volume = 0.7;
+        //music.loopFull(0.6);
 
         players = game.add.group();
         players.enableBody = true;
 
         var animations_player1=[["left",[0,1,2,3],10,true],["right",[5,6,7,8],10,true]];
-        player1 = new Player(1,150,300,'player',animations_player1,game);
+		var spawnxy = getSpawnXY();
+        player1 = new Player(1,spawnxy[0],spawnxy[1],'player',animations_player1,game);
         setMeleeWeapon(player1, new Stuhl(0,0,game));
         player1.anchor.setTo(0.5,0.45);
         player1.weapon = RangedWeapon(20, 'projectile', 300, 200, 15, 'player', 50, 10, game);
@@ -293,7 +307,8 @@ MainGame.prototype = {
 
 
         var animations_player2=[["left",[0,1],5,true],["right",[2,3],5,true]];
-        player2 = new Player(2,300,300,'player2',animations_player2,game);
+		spawnxy = getSpawnXY();
+        player2 = new Player(2,spawnxy[0],spawnxy[1],'player2',animations_player2,game);
         setMeleeWeapon(player2, new Stuhl(0,0,game));
         player2.anchor.setTo(0.5,0.2);
         player2.weapon = RangedWeapon(20, 'projectile', 300, 200, 15, 'player2', 50, 10, game);
@@ -469,6 +484,8 @@ MainGame.prototype = {
         });*/
 
         if(p1cursors.down.isDown){
+			console.log("X = " + player1.body.x + " Y = " + player1.body.y);
+			
             if(player1.melee.animations.currentAnim.name.match(/idle_*/)) {
                 if (player1.direction === 'right') {
                     player1.melee.animations.play("attack_right");
@@ -532,6 +549,24 @@ function respawnP2(){
     ausgabe.text = "";
     music.play();
 }
+
+function getSpawnXY(){
+
+	var x = Math.random() * (823-14) + 14;
+	if(x < 125){
+		var xy = [x , 256];
+		return xy;
+	}
+	if(x > 566){
+		x = Math.random() * (823-681) + 681;
+		var xy = [x,337];
+		return xy;
+	}else{
+		var xy = [x,470];
+		return xy;
+	}
+}
+
 
 
 
