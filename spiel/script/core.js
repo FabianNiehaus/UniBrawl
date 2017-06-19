@@ -269,6 +269,14 @@ MainGame.prototype = {
         player1.melee.animations.play("idle_right");
         player1.direction = 'right';
         players.add(player1);
+        player1.health = 0;
+        player1.maxHealth = 300;
+        player1HealthMeter = game.add.plugin(Phaser.Plugin.HealthMeter);
+        player1HealthMeter.text(
+            player1,
+            {x: 20, y: 43, width: 100, height: 20}
+        );
+
 
         var animations_player2=[["left",[0,1],5,true],["right",[2,3],5,true]];
         player2 = new Player(2,300,300,'player2',animations_player2,game);
@@ -280,6 +288,13 @@ MainGame.prototype = {
         player2.melee.animations.play("idle_left");
         player2.direction = 'left';
         players.add(player2);
+        player2.health = 10;
+        player2.maxHealth = 300;
+        player2HealthMeter = game.add.plugin(Phaser.Plugin.HealthMeter);
+        player2HealthMeter.text(
+            player1,
+            {x: game.world.width - 120, y: 43, width: 100, height: 20}
+        );
 
         cursors = game.input.keyboard.createCursorKeys();
 
