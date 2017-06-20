@@ -42,12 +42,12 @@ var Off = {
 };
 var MainGame = {
 	preload : function(){
-		game.load.image('background','assets/loadingscreen.png');
+		game.load.image('background','assets/loading_enger.jpg');
 		game.load.image('startButton', 'assets/startButton.png');
 	},
 	create : function(){
 		game.add.tileSprite(0, 0, 900, 600, 'background');
-		var startButton = game.add.button(200, 400,'startButton',this.start,this,2,1,0);
+		var startButton = game.add.button(240, 290,'startButton',this.start,this,2,1,0);
 	},
 
 	start : function(){
