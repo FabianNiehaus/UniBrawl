@@ -319,6 +319,7 @@ MainGame.prototype = {
         game.load.spritesheet('player2', 'assets/Spritesheet_Mathis.png', 39, 100);
         //game.load.spritesheet('stuhl', 'assets/Waffe1_Stuhl1_5.png',35,50);
         game.load.spritesheet('stuhl', 'assets/Stuhl_Sprite2.png', 78, 68);
+        game.load.spritesheet('stuhlP1', 'assets/StuhL_SpriteP1.png', 78, 68);
         game.load.image('ground','assets/world/Tisch2_2.png');
         game.load.image('ground2','assets/world/Tisch3.png');
         game.load.image('background','assets/world/Mensa2_3_klein.png');
