@@ -313,7 +313,7 @@ MainGame.prototype = {
         game.load.audio('music', 'assets/music.wav');
         game.load.audio('hit', 'assets/hit.wav');
         game.load.audio('shoot', 'assets/shoot.wav');
-        game.load.spritesheet('player','assets/dude.png',32,48);
+        game.load.spritesheet('player', 'assets/Spritesheet_Fabian.png', 39, 100);
         game.load.spritesheet('meleeAttack','assets/firstaid.png',35,50);
         game.load.spritesheet('projectile', 'assets/Teller.png');
         game.load.spritesheet('player2', 'assets/Spritesheet_Mathis.png', 39, 100);
@@ -343,11 +343,11 @@ MainGame.prototype = {
         players = game.add.group();
         players.enableBody = true;
 
-        var animations_player1=[["left",[0,1,2,3],10,true],["right",[5,6,7,8],10,true]];
+        var animations_player1 = [["left", [0, 1], 5, true], ["right", [2, 3], 5, true]];
 		var spawnxy = getSpawnXY();
         player1 = new Player(1,spawnxy[0],spawnxy[1],'player',animations_player1,game);
         setMeleeWeapon(player1, new Stuhl(0,0,game));
-        player1.anchor.setTo(0.5,0.45);
+        player1.anchor.setTo(0.5, 0.5);
         player1.weapon = RangedWeapon(20, 'projectile', 300, 200, 15, 'player', 50, 10, game);
         player1.melee.animations.play("idle_right");
         player1.direction = 'right';
@@ -427,7 +427,9 @@ MainGame.prototype = {
         checkMeleeCollision();
 
         //Spieler soll anhalten, sobald keine Richtungstaste gedrückt ist
-        if (player1.isHit <= -1) {
+        /*
+
+         if (player1.isHit <= -1) {
             player1.body.velocity.x = 0;
 
             if (p1cursors.left.isDown) {
@@ -438,6 +440,7 @@ MainGame.prototype = {
                     player1.animations.stop();
                     player1.frame = 4;
                 }
+
                 player1.direction = 'left';
                 if (player1.melee.animations.currentAnim.name === "idle_right") {
                     player1.melee.animations.play("idle_left");
@@ -464,6 +467,42 @@ MainGame.prototype = {
                 player1.doubleJump = false;
             }
             if (p1cursors.up.isDown && player1.body.touching.down) {
+                player1.body.velocity.y = -350;
+                game.time.events.add(Phaser.Timer.SECOND * 1, function () {
+                    player1.doubleJump = true
+                }, this);
+            }
+        }
+         */
+        if (player1.isHit <= -1) {
+            player1.body.velocity.x = 0;
+
+            if (p1cursors.left.isDown) {
+                player1.body.velocity.x = -150;
+                player1.animations.play('left');
+                player1.direction = 'left';
+                if (player1.melee.animations.currentAnim.name === "idle_right") {
+                    player1.melee.animations.play("idle_left");
+                }
+            } else if (p1cursors.right.isDown) {
+                player1.body.velocity.x = 150;
+                player1.animations.play('right');
+                player1.direction = 'right';
+                if (player1.melee.animations.currentAnim.name === "idle_left") {
+                    player1.melee.animations.play("idle_right");
+                }
+            } else {
+                player1.animations.stop();
+                //player2.frame = 1;
+            }
+
+            if (p1cursors.up.isDown && !player1.body.touching.down && player1.doubleJump === true) {
+                player1.body.velocity.y = -350;
+                player1.doubleJump = false;
+            }
+
+            if (p1cursors.up.isDown &&
+                player1.body.touching.down) {
                 player1.body.velocity.y = -350;
                 game.time.events.add(Phaser.Timer.SECOND * 1, function () {
                     player1.doubleJump = true
