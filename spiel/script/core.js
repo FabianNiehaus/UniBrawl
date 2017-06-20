@@ -292,9 +292,10 @@ MainGame.prototype = {
         game.load.audio('shoot', 'assets/shoot.wav');
         game.load.spritesheet('player','assets/dude.png',32,48);
         game.load.spritesheet('meleeAttack','assets/firstaid.png',35,50);
-        game.load.spritesheet('projectile','assets/kugel.png');
+        game.load.spritesheet('projectile', 'assets/Teller.png');
         game.load.spritesheet('player2','assets/Mathis_V2.png',62.25,100);
         game.load.spritesheet('stuhl', 'assets/Waffe1_Stuhl1_5.png',35,50);
+        //game.load.spritesheet('stuhl', 'assets/Suthl_Sprite2.png',35,50);
         game.load.image('ground','assets/world/Tisch2_2.png');
         game.load.image('ground2','assets/world/Tisch3.png');
         game.load.image('background','assets/world/Mensa2_3_klein.png');
