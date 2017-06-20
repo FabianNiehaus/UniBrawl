@@ -18,7 +18,15 @@ var music;
 var hit;
 var lose;
 var ameisenkrieg
-
+function volumeUp(){
+	music.volume += 0.1;
+}
+function volumeDown(){
+	music.volume -= 0.1;
+}
+function ausschalten(){
+	game.state.start('offscreen');
+}
 var Off = {
 	preload : function(){
 		

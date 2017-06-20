@@ -11,35 +11,48 @@ div{
 }
 
 #OnOff{
-	background-color:#cdcdcd;
-	height: 50px;
-	width: 50px;	
-	margin-left: 1150px;
+	height: 0px;
+	width: 0px;	
+	margin-left: 1125px;
 	margin-top: 170px;
-	align-self: center;
 	position: absolute;
 	z-index:2;
 }
+#lauter{
+
+	z-index:2;
+	height: 0px;
+	width: 0px;
+	margin-left: 1185px;
+	margin-top: 370px;
+	position: absolute;
+}
+#leiser{
+
+	z-index:2;
+	height: 0px;
+	width: 0px;
+	margin-left: 1115px;
+	margin-top: 370px;
+	position: absolute;
+}
 #bg
 {
-	background-color:#efefef;
 	z-index:1;
 	height: 0px;
 	width: 0px;
 	margin-top: 0px;
 	position: absolute;
 	pointer-events: none;
-	align-self: center;
 }
+
+
 #game
 {
-
-	background-color:#cdcdcd;
 	height: 630px;
 	width: 930px;	
 	margin-left: 80px;
 	margin-top: 70px;
-	align-self: center;
 	position: absolute;
 	z-index:0;
 }

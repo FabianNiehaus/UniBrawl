@@ -9,12 +9,31 @@
 
 		<div id="game"><iframe id="spiel" name="spiel" src="spiel/Index.html" frameBorder="0" width="930" height="630"></iframe></div>
 		<div id="bg"><img src="tv.png" alt="UNIBRAWL" width="1350" height="800"/> </div>
-		<form>
-		<button id="OnOff" type="button" onClick="starten();">An<br>Aus</button>
-	</form>
+	<div id="OnOff" ><img id="OnOff2" src="spiel/assets/OnOffButton.png" alt="UNIBRAWL" width="100" height="150" onClick="starten();"/></div>
+	<div id="lauter"><img src="spiel/assets/lauter.png" alt="UNIBRAWL" width="50" height="50"/> </div>
+		<div id="leiser"><img src="spiel/assets/leiser.png" alt="UNIBRAWL" width="50" height="50"/> </div>
+
+
 	<script>
+		var bild = document.getElementById('OnOff2').src;
 		function starten(){
-			spiel.starten();
+		
+			if(document.getElementById('OnOff2').src != bild){
+				document.getElementById('OnOff2').src = "spiel/assets/OnOffButton.png";
+				spiel.turnOff();
+			}else{
+				document.getElementById('OnOff2').src = "spiel/assets/ButtonOn.png";
+				spiel.starten();
+			}
+			
+			spiel.focus();
+		}
+		function lauter(){
+			spiel.lauter();
+			spiel.focus();
+		}
+		function leiser(){
+			spiel.leiser();
 			spiel.focus();
 		}
 	</script>
