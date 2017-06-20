@@ -347,7 +347,7 @@ MainGame.prototype = {
 		var spawnxy = getSpawnXY();
         player1 = new Player(1,spawnxy[0],spawnxy[1],'player',animations_player1,game);
         setMeleeWeapon(player1, new Stuhl(0,0,game));
-        player1.anchor.setTo(0.5, 0.5);
+        player1.anchor.setTo(0.45, 0.5);
         player1.weapon = RangedWeapon(20, 'projectile', 300, 200, 15, 'player', 50, 10, game);
         player1.melee.animations.play("idle_right");
         player1.direction = 'right';
