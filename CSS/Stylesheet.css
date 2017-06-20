@@ -45,8 +45,17 @@ body{
 	position: absolute;
 	pointer-events: none;
 	align-self: center;
+	box-shadow: 10px 10px 5px black;
 }
 
+#bg_tisch {
+	z-index: 1;
+	top: 800px;
+	margin-top: 0px;
+	position: absolute;
+	pointer-events: none;
+	box-shadow: 10px 10px 5px black;
+}
 
 #game
 {
@@ -57,4 +66,10 @@ body{
 	position: absolute;
 	z-index:0;
 	align-self: center;
+}
+
+#content {
+	width: 1350px;
+	margin-left: auto;
+	margin-right: auto;
 }

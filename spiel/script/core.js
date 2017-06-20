@@ -23,8 +23,8 @@ var tvSound;
 
 var Fernseher = {
 	preload : function(){
-		
-		game.load.spritesheet('ameisenkrieg','assets/ameisenkrieg2.png',840,600,5);
+
+        game.load.spritesheet('ameisenkrieg', 'assets/ameisenkrieg2.png', 900, 600, 5);
 		game.load.audio('rauschen', 'assets/tvStaticNoise.wav');
 	},
 	create : function(){
@@ -32,7 +32,7 @@ var Fernseher = {
 		tvSound.play();
         tvSound.volume = 0.1;
         tvSound.loopFull(0.6);
-		ameisenkrieg = game.add.sprite(20,0,'ameisenkrieg');
+        ameisenkrieg = game.add.sprite(0, 0, 'ameisenkrieg');
 		var flimmern = ameisenkrieg.animations.add('flimmern');
 		ameisenkrieg.animations.play('flimmern',30,true);
 		//flimmern.animations.play();

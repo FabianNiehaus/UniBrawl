@@ -2,21 +2,24 @@
 <html>
 <head>
 <meta charset="utf-8">
-	<title>Unbenanntes Dokument</title>
+    <title>UniBrawl</title>
 	<link rel="stylesheet" href="css/Stylesheet.css">
 	</head>
 <body>
-<center>
-	<div id="TV">
-	<div id="bg"><img src="tv.png" alt="UNIBRAWL" width="1350" height="800" onClick="spiel.focus();"/> </div>
-	<div id="game"><iframe id="spiel" name="spiel" src="spiel/Index.html" frameBorder="0" width="930" height="630"></iframe></div>
-		
-	<div id="OnOff" ><img id="OnOff2" src="spiel/assets/OnOffButton.png" alt="UNIBRAWL" width="100" height="150" onClick="starten();"/></div>
-	<div id="lauter"><img src="spiel/assets/lauter.png" alt="UNIBRAWL" width="50" height="50" onClick="lauter();"/> </div>
-	<div id="leiser"><img src="spiel/assets/leiser.png" alt="UNIBRAWL" width="50" height="50" onClick="leiser();"/> </div>
-	</div>
-	</center>
 
+<div id="content">
+    <div id="game">
+        <iframe id="spiel" name="spiel" src="spiel/Index.html" frameBorder="0" width="930" height="630"></iframe>
+    </div>
+    <div id="bg"><img src="tv.png" alt="UNIBRAWL" width="1350" height="800"/></div>
+    <div id="bg_tisch"><img src="Tisch_Index.png" alt="Ein Tisch." width="1350"></div>
+    <div id="OnOff"><img id="OnOff2" src="spiel/assets/OnOffButton.png" alt="UNIBRAWL" width="100" height="150"
+                         onClick="starten();"/></div>
+    <div id="lauter"><img src="spiel/assets/lauter.png" alt="UNIBRAWL" width="50" height="50" onClick="lauter();"/>
+    </div>
+    <div id="leiser"><img src="spiel/assets/leiser.png" alt="UNIBRAWL" width="50" height="50" onClick="leiser();"/>
+    </div>
+	</div>
 
 	<script>
 		var bild = document.getElementById('OnOff2').src;
@@ -28,19 +31,24 @@
 			}else{
 				document.getElementById('OnOff2').src = "spiel/assets/ButtonOn.png";
 				spiel.starten();
+                document.getElementById("spiel").contentDocument.addEventListener('click', function () {
+                    spiel.focus();
+                }, false);
 			}
 			
 			spiel.focus();
-		}
+        }
+
 		function lauter(){
 			spiel.lauter();
 			spiel.focus();
 		}
-		function leiser(){
-			spiel.leiser();
-			spiel.focus();
+        function leiser() {
+            spiel.leiser();
+            spiel.focus();
 		}
-	</script>
+
+    </script>
 	
 		
 	
