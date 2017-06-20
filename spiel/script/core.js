@@ -17,7 +17,7 @@ var ausgabe;
 var music;
 var hit;
 var lose;
-var ameisenkrieg
+var ameisenkrieg;
 function volumeUp(){
 	music.volume += 0.1;
 }
@@ -271,11 +271,13 @@ getHit = function(player, weapon, direction) {
         player.isHit = weapon.hitTimeout;
 
         if (direction === "left") {
-            player.body.velocity.y = weapon.knockupAmount + (weapon.knockupAmount * player.health * 0.01);
-            player.body.velocity.x = weapon.knockbackAmount + (weapon.knockbackAmount * player.health * 0.01) * -1;
+            player.body.velocity.y = weapon.knockupAmount + (weapon.knockupAmount * player.health * 0.005);
+            player.body.velocity.x = (weapon.knockbackAmount + (weapon.knockbackAmount * player.health * 0.01)) * -1;
+            player.doubleJump = true;
         } else if (direction === "right") {
-            player.body.velocity.y = weapon.knockupAmount + (weapon.knockupAmount * player.health * 0.01);
+            player.body.velocity.y = weapon.knockupAmount + (weapon.knockupAmount * player.health * 0.005);
             player.body.velocity.x = weapon.knockbackAmount + (weapon.knockbackAmount * player.health * 0.01);
+            player.doubleJump = true;
         }
 
         player.health += weapon.damage;
