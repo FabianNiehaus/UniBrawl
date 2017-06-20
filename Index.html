@@ -3,15 +3,19 @@
 <head>
 <meta charset="utf-8">
 	<title>Unbenanntes Dokument</title>
-	<link rel="stylesheet" href="CSS/Stylesheet.css">
+	<link rel="stylesheet" href="css/Stylesheet.css">
 	</head>
 <body>
-
-		<div id="game"><iframe id="spiel" name="spiel" src="spiel/Index.html" frameBorder="0" width="930" height="630"></iframe></div>
-		<div id="bg"><img src="tv.png" alt="UNIBRAWL" width="1350" height="800"/> </div>
+<center>
+	<div id="TV">
+	<div id="bg"><img src="tv.png" alt="UNIBRAWL" width="1350" height="800" onClick="spiel.focus();"/> </div>
+	<div id="game"><iframe id="spiel" name="spiel" src="spiel/Index.html" frameBorder="0" width="930" height="630"></iframe></div>
+		
 	<div id="OnOff" ><img id="OnOff2" src="spiel/assets/OnOffButton.png" alt="UNIBRAWL" width="100" height="150" onClick="starten();"/></div>
 	<div id="lauter"><img src="spiel/assets/lauter.png" alt="UNIBRAWL" width="50" height="50" onClick="lauter();"/> </div>
-		<div id="leiser"><img src="spiel/assets/leiser.png" alt="UNIBRAWL" width="50" height="50" onClick="leiser();"/> </div>
+	<div id="leiser"><img src="spiel/assets/leiser.png" alt="UNIBRAWL" width="50" height="50" onClick="leiser();"/> </div>
+	</div>
+	</center>
 
 
 	<script>

@@ -4,10 +4,10 @@ body{
 	background-color: #968C35;
 
 }
-div{
-
-
-
+#TV{
+	height: 100%;
+	width: 100%;
+	align-content: center;
 }
 
 #OnOff{
@@ -44,6 +44,7 @@ div{
 	margin-top: 0px;
 	position: absolute;
 	pointer-events: none;
+	align-self: center;
 }
 
 
@@ -55,4 +56,5 @@ div{
 	margin-top: 70px;
 	position: absolute;
 	z-index:0;
+	align-self: center;
 }
