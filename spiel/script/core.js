@@ -17,7 +17,7 @@ var ausgabe;
 var music;
 var hit;
 var lose;
-var ameisenkrieg
+var ameisenkrieg;
 
 var Off = {
 	preload : function(){
@@ -38,8 +38,8 @@ var Off = {
 	ameisenkrieg.animations.stop();
 	game.state.start('MainGame');
 }
-	
-}
+
+};
 var MainGame = {
 	preload : function(){
 		game.load.image('background','assets/loadingscreen.png');
@@ -316,7 +316,7 @@ MainGame.prototype = {
         game.load.spritesheet('player','assets/dude.png',32,48);
         game.load.spritesheet('meleeAttack','assets/firstaid.png',35,50);
         game.load.spritesheet('projectile', 'assets/Teller.png');
-        game.load.spritesheet('player2','assets/Mathis_V2.png',62.25,100);
+        game.load.spritesheet('player2', 'assets/Spritesheet_Mathis.png', 39, 100);
         //game.load.spritesheet('stuhl', 'assets/Waffe1_Stuhl1_5.png',35,50);
         game.load.spritesheet('stuhl', 'assets/Stuhl_Sprite2.png', 78, 68);
         game.load.image('ground','assets/world/Tisch2_2.png');
