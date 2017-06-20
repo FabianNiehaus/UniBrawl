@@ -17,7 +17,8 @@ var ausgabe;
 var music;
 var hit;
 var lose;
-var ameisenkrieg
+var ameisenkrieg;
+var tvSound;
 function volumeUp(){
 	music.volume += 0.1;
 }
@@ -33,9 +34,13 @@ var Off = {
 	preload : function(){
 		
 		game.load.spritesheet('ameisenkrieg','assets/ameisenkrieg2.png',840,600,5);
-		 
+		game.load.audio('rauschen', 'assets/tvStaticNoise.wav'); 
 	},
 	create : function(){
+		tvSound = game.add.audio('rauschen');
+		tvSound.play();
+        tvSound.volume = 0.1;
+        tvSound.loopFull(0.6);
 		ameisenkrieg = game.add.sprite(20,0,'ameisenkrieg');
 		var flimmern = ameisenkrieg.animations.add('flimmern');
 		ameisenkrieg.animations.play('flimmern',30,true);
@@ -45,6 +50,7 @@ var Off = {
 	},
 	
 	starten : function(){
+	tvSound.stop();
 	ameisenkrieg.animations.stop();
 	game.state.start('MainGame');
 }
@@ -52,11 +58,13 @@ var Off = {
 };
 var MainGame = {
 	preload : function(){
+		game.load.audio('music', 'assets/music.wav');
 		game.load.image('background','assets/loading.jpg');
 		game.load.image('startButton', 'assets/startButton.png');
 	},
 	create : function(){
 		game.add.tileSprite(0, 0, 900, 600, 'background');
+		music = game.add.audio('music');
 		var startButton = game.add.button(240, 290,'startButton',this.start,this,2,1,0);
 	},
 
@@ -320,7 +328,7 @@ MainGame.prototype = {
 
     preload: function() {
         game.load.audio('lose', 'assets/lose.wav');
-        game.load.audio('music', 'assets/music.wav');
+        
         game.load.audio('hit', 'assets/hit.wav');
         game.load.audio('shoot', 'assets/shoot.wav');
         game.load.spritesheet('player', 'assets/Spritesheet_Fabian.png', 39, 100);
@@ -343,7 +351,7 @@ MainGame.prototype = {
         //Sound
         shoot = game.add.audio('shoot');
         hit = game.add.audio('hit');
-        music = game.add.audio('music');
+        
         lose = game.add.audio('lose');
         music.play();
         music.volume = 0.7;
