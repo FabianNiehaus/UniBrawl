@@ -7,7 +7,19 @@
 	</head>
 <body>
 
-	<div> <img src="spiel/assets/banner_klein.png" alt="UNIBRAWL"/> </div>
-	<div> <iframe src="spiel/Index.html" frameBorder="0" width="930" height="630"></iframe> </div>
+		<div id="game"><iframe id="spiel" name="spiel" src="spiel/Index.html" frameBorder="0" width="930" height="630"></iframe></div>
+		<div id="bg"><img src="tv.png" alt="UNIBRAWL" width="1350" height="800"/> </div>
+		<form>
+		<button id="OnOff" type="button" onClick="starten();">An<br>Aus</button>
+	</form>
+	<script>
+		function starten(){
+			spiel.starten();
+			spiel.focus();
+		}
+	</script>
+	
+		
+	
 </body>
 </html>

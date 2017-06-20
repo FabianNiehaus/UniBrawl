@@ -4,7 +4,8 @@ function init() {
 
     game.state.add("MainGame", MainGame);
 	game.state.add("spielstart", MainGame.prototype);
-    game.state.start("MainGame");
+	game.state.add("offscreen",Off);
+    game.state.start("offscreen");
 
 }
 
@@ -16,7 +17,29 @@ var ausgabe;
 var music;
 var hit;
 var lose;
+var ameisenkrieg
 
+var Off = {
+	preload : function(){
+		
+		game.load.spritesheet('ameisenkrieg','assets/ameisenkrieg2.png',840,600,5);
+		 
+	},
+	create : function(){
+		ameisenkrieg = game.add.sprite(20,0,'ameisenkrieg');
+		var flimmern = ameisenkrieg.animations.add('flimmern');
+		ameisenkrieg.animations.play('flimmern',30,true);
+		//flimmern.animations.play();
+		//game.add.tileSprite(0, 0, 900, 600, 'gif');
+		//var startButton = game.add.button(200, 400,'startButton',this.start,this,2,1,0);
+	},
+	
+	starten : function(){
+	ameisenkrieg.animations.stop();
+	game.state.start('MainGame');
+}
+	
+}
 var MainGame = {
 	preload : function(){
 		game.load.image('background','assets/loadingscreen.png');
@@ -304,7 +327,7 @@ MainGame.prototype = {
 
 
     create: function(){
-        game.physics.startSystem(Phaser.Physics.ARCADE);
+        
 
         game.add.tileSprite(0, 0, 900, 600, 'background');
 

@@ -1,15 +1,45 @@
 @charset "UTF-8";
 /* CSS Document */
 body{
-	background: #FFFAE2;
+	background-color: #968C35;
 
 }
 div{
-	display: flex;
-	justify-content: center;
+
+
 
 }
 
-h1{
-	font-size: 5em;
+#OnOff{
+	background-color:#cdcdcd;
+	height: 50px;
+	width: 50px;	
+	margin-left: 1150px;
+	margin-top: 170px;
+	align-self: center;
+	position: absolute;
+	z-index:2;
+}
+#bg
+{
+	background-color:#efefef;
+	z-index:1;
+	height: 0px;
+	width: 0px;
+	margin-top: 0px;
+	position: absolute;
+	pointer-events: none;
+	align-self: center;
+}
+#game
+{
+
+	background-color:#cdcdcd;
+	height: 630px;
+	width: 930px;	
+	margin-left: 80px;
+	margin-top: 70px;
+	align-self: center;
+	position: absolute;
+	z-index:0;
 }
