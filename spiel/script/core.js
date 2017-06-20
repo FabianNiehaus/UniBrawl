@@ -85,12 +85,12 @@ function Stuhl(x, y, game){
     //Idle-Animation
     var idle_right = stuhl.animations.add("idle_right",[1],1,true);
     idle_right.onStart.add(function(){
-        stuhl.anchor.set(0,0);
+        stuhl.anchor.set(0.1, 0);
     });
 
     var idle_left = stuhl.animations.add("idle_left",[0],1,true);
     idle_left.onStart.add(function(){
-        stuhl.anchor.set(1,0);
+        stuhl.anchor.set(0.9, 0);
     });
 
     var stuhl_attack_right = stuhl.animations.add("attack_right",[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],90,false);
@@ -294,8 +294,8 @@ MainGame.prototype = {
         game.load.spritesheet('meleeAttack','assets/firstaid.png',35,50);
         game.load.spritesheet('projectile', 'assets/Teller.png');
         game.load.spritesheet('player2','assets/Mathis_V2.png',62.25,100);
-        game.load.spritesheet('stuhl', 'assets/Waffe1_Stuhl1_5.png',35,50);
-        //game.load.spritesheet('stuhl', 'assets/Suthl_Sprite2.png',35,50);
+        //game.load.spritesheet('stuhl', 'assets/Waffe1_Stuhl1_5.png',35,50);
+        game.load.spritesheet('stuhl', 'assets/Stuhl_Sprite2.png', 78, 68);
         game.load.image('ground','assets/world/Tisch2_2.png');
         game.load.image('ground2','assets/world/Tisch3.png');
         game.load.image('background','assets/world/Mensa2_3_klein.png');
@@ -341,7 +341,7 @@ MainGame.prototype = {
 		spawnxy = getSpawnXY();
         player2 = new Player(2,spawnxy[0],spawnxy[1],'player2',animations_player2,game);
         setMeleeWeapon(player2, new Stuhl(0,0,game));
-        player2.anchor.setTo(0.5,0.2);
+        player2.anchor.setTo(0.5, 0.5);
         player2.weapon = RangedWeapon(20, 'projectile', 300, 200, 15, 'player2', 50, 10, game);
         //player2.scale.setTo(0.8,0.8);
         //player2.melee.scale.setTo(1,1);
