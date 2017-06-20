@@ -42,7 +42,7 @@ var Off = {
 };
 var MainGame = {
 	preload : function(){
-		game.load.image('background','assets/loading_enger.jpg');
+		game.load.image('background','assets/loading.jpg');
 		game.load.image('startButton', 'assets/startButton.png');
 	},
 	create : function(){
