@@ -328,7 +328,6 @@ MainGame.prototype = {
 
 
     create: function(){
-        
 
         game.add.tileSprite(0, 0, 900, 600, 'background');
 
