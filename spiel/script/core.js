@@ -4,7 +4,7 @@ function init() {
 
     game.state.add("MainGame", MainGame);
 	game.state.add("spielstart", MainGame.prototype);
-	game.state.add("offscreen",Off);
+	game.state.add("offscreen",Fernseher);
     game.state.start("offscreen");
 
 }
@@ -19,18 +19,9 @@ var hit;
 var lose;
 var ameisenkrieg;
 var tvSound;
-function volumeUp(){
-	music.volume += 0.1;
-}
-function volumeDown(){
-	music.volume -= 0.1;
-}
-function ausschalten(){
-	music.stop();
-	game.state.start('offscreen');
-}
 
-var Off = {
+
+var Fernseher = {
 	preload : function(){
 		
 		game.load.spritesheet('ameisenkrieg','assets/ameisenkrieg2.png',840,600,5);
@@ -53,7 +44,17 @@ var Off = {
 	tvSound.stop();
 	ameisenkrieg.animations.stop();
 	game.state.start('MainGame');
-}
+},
+	volumeUp : function(){
+	music.volume += 0.1;
+},
+	volumeDown : function(){
+	music.volume -= 0.1;
+},
+	ausschalten : function(){
+	music.stop();
+	game.state.start('offscreen');
+},
 
 };
 var MainGame = {
