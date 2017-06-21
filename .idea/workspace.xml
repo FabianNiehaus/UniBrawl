@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d19df6b3-7e4d-4a41-897e-877c0e91dfca" name="Default" comment="Richtig viel geschafft!" />
+    <list default="true" id="d19df6b3-7e4d-4a41-897e-877c0e91dfca" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spiel/assets/Stuhl_Attack_Right.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spiel/assets/Stuhl_Attack_Right.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/spiel/assets/Stuhl_Attack_Right.psd" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spiel/script/core.js" afterPath="$PROJECT_DIR$/spiel/script/core.js" />
+    </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -19,51 +25,28 @@
       <file leaf-file-name="core.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/spiel/script/core.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="389">
-              <caret line="417" column="33" lean-forward="true" selection-start-line="417" selection-start-column="33" selection-end-line="417" selection-end-column="33" />
+            <state relative-caret-position="620">
+              <caret line="444" column="70" lean-forward="false" selection-start-line="444" selection-start-column="70" selection-end-line="444" selection-end-column="70" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Index.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/spiel/Index.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="100">
-              <caret line="4" column="71" lean-forward="false" selection-start-line="4" selection-start-column="71" selection-end-line="4" selection-end-column="71" />
-              <folding />
-            </state>
+      <file leaf-file-name="Stuhl_SpriteP1.png" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/spiel/assets/Stuhl_SpriteP1.png">
+          <provider selected="true" editor-type-id="images">
+            <state />
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="damage.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/spiel/script/damage.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="500">
-              <caret line="20" column="5" lean-forward="false" selection-start-line="20" selection-start-column="5" selection-end-line="20" selection-end-column="5" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="lives.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/spiel/script/lives.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="350">
-              <caret line="28" column="27" lean-forward="false" selection-start-line="28" selection-start-column="27" selection-end-line="28" selection-end-column="27" />
-              <folding />
-            </state>
+      <file leaf-file-name="Stuhl_Sprite2.png" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/spiel/assets/Stuhl_Sprite2.png">
+          <provider selected="true" editor-type-id="images">
+            <state />
           </provider>
         </entry>
       </file>
     </leaf>
-  </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="JavaScript File" />
-      </list>
-    </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
@@ -75,22 +58,9 @@
       <find>Stuhl_Attack_right</find>
       <find>doubleJump</find>
       <find>fernseher</find>
-      <find>._draw</find>
-      <find>getFirst</find>
-      <find>icon</find>
-      <find>HealthMeter</find>
-      <find>hea</find>
-      <find>live</find>
-      <find>sound</find>
-      <find>icon.kill</find>
-      <find>ausgabe.text</find>
-      <find>music</find>
-      <find>setTime</find>
+      <find>arcade</find>
+      <find>checkrange</find>
     </findStrings>
-    <replaceStrings>
-      <replace>Lives</replace>
-      <replace>Damage</replace>
-    </replaceStrings>
   </component>
   <component name="Git.Settings">
     <option name="PREVIOUS_COMMIT_AUTHORS">
@@ -100,6 +70,11 @@
     </option>
     <option name="UPDATE_TYPE" value="MERGE" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="fabian_melee_broken" />
+      </map>
+    </option>
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -107,10 +82,7 @@
         <option value="$PROJECT_DIR$/To-Do.txt" />
         <option value="$PROJECT_DIR$/CSS/Stylesheet.css" />
         <option value="$PROJECT_DIR$/Index.html" />
-        <option value="$PROJECT_DIR$/spiel/script/damage.js" />
-        <option value="$PROJECT_DIR$/spiel/Index.html" />
         <option value="$PROJECT_DIR$/spiel/script/core.js" />
-        <option value="$PROJECT_DIR$/spiel/script/lives.js" />
       </list>
     </option>
   </component>
@@ -121,10 +93,10 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-11" />
-    <option name="y" value="-11" />
-    <option name="width" value="2182" />
-    <option name="height" value="1368" />
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1936" />
+    <option name="height" value="1056" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -142,7 +114,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
@@ -184,24 +155,180 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="script" />
+              <option name="myItemId" value="assets" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="HbShouldOpenHtmlAsHb" value="" />
     <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+    <property name="Git.Branch.Popup.ShowAllRemotes" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\xampp\htdocs\UniBrawl\spiel\script" />
       <recent name="C:\xampp\htdocs\Phaser\UniBrawl\spiel\assets" />
     </key>
+  </component>
+  <component name="RestoreUpdateTree" date="Moments ago" ActionInfo="_Update">
+    <UpdatedFiles>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Updated from server" />
+        <option name="myStatusName" value="Changed on server" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="CHANGED_ON_SERVER" />
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Updated" />
+          <option name="myStatusName" value="Changed" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="UPDATED" />
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.idea/workspace.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/CSS/Stylesheet.css</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Index.html</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/spiel/Index.html</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/spiel/assets/Spritesheet_Fabian.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/spiel/assets/Spritesheet_Mathis.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/spiel/assets/Stuhl_Sprite2.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/spiel/assets/hit.wav</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/spiel/script/core.js</PATH>
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Created" />
+          <option name="myStatusName" value="Created" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="CREATED" />
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/img/Tisch_Index.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/img/background.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/img/tv.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/spiel/assets/ameisenkrieg.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/spiel/assets/fall.wav</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/spiel/assets/heart.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/spiel/assets/murcielago.mp3</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/spiel/assets/neustartButton.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/spiel/assets/spawn.wav</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/spiel/assets/world/Mensa2_4_klein.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/spiel/script/damage.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/spiel/script/lives.js</PATH>
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Deleted" />
+          <option name="myStatusName" value="Deleted" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="true" />
+          <option name="myId" value="REMOVED_FROM_REPOSITORY" />
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/Tisch_Index.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/spiel/assets/Neuer Ordner/Ebene 2.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/spiel/assets/Neuer Ordner/Ebene 3.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/spiel/assets/Neuer Ordner/Ebene 4.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/spiel/assets/Neuer Ordner/Ebene 5.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/spiel/assets/Neuer Ordner/Ebene1.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/spiel/assets/Neuer Ordner/gestalten-design-on-off-schalter-14718165.jpg</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/spiel/assets/ameisenkrieg2.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/spiel/assets/armeisenkrieg.gif</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/spiel/assets/baddie3.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/spiel/assets/banner_klein.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/spiel/assets/diamond.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/spiel/assets/dude.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/spiel/assets/dude.psd</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/spiel/assets/dude_attack.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/spiel/assets/dude_attack.psd</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/spiel/assets/firstaid.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/spiel/assets/kugel.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/spiel/assets/loadingscreen2.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/spiel/assets/platform.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/spiel/assets/sky.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/spiel/assets/star.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/spiel/assets/world/Mensa2_3_klein.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/tv.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/tv.svg</PATH>
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Restored" />
+          <option name="myStatusName" value="Will be restored" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="RESTORED" />
+        </FILE-GROUP>
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Modified" />
+        <option name="myStatusName" value="Modified" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MODIFIED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Skipped" />
+        <option name="myStatusName" value="Skipped" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="SKIPPED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with conflicts" />
+        <option name="myStatusName" value="Will be merged with conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_CONFLICTS" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with tree conflicts" />
+        <option name="myStatusName" value="Merged with tree conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_TREE_CONFLICT" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with property conflicts" />
+        <option name="myStatusName" value="Will be merged with property conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_PROPERTY_CONFLICT" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged" />
+        <option name="myStatusName" value="Will be merged" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Not in repository" />
+        <option name="myStatusName" value="Not in repository" />
+        <option name="mySupportsDeletion" value="true" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="UNKNOWN" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Locally added" />
+        <option name="myStatusName" value="Locally added" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="LOCALLY_ADDED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Locally removed" />
+        <option name="myStatusName" value="Locally removed" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="LOCALLY_REMOVED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Switched" />
+        <option name="myStatusName" value="Switched" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="SWITCHED" />
+      </FILE-GROUP>
+    </UpdatedFiles>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -300,6 +427,9 @@
   <component name="StructureViewFactory">
     <option name="ACTIVE_ACTIONS" value=",HIDE_INHERITED" />
   </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="d19df6b3-7e4d-4a41-897e-877c0e91dfca" name="Default" comment="" />
@@ -317,8 +447,8 @@
       <workItem from="1497884045641" duration="22000" />
       <workItem from="1497884104015" duration="122000" />
       <workItem from="1497953208008" duration="5066000" />
-      <workItem from="1497995419665" duration="4414000" />
-      <workItem from="1498060492577" duration="4352000" />
+      <workItem from="1497995419665" duration="4453000" />
+      <workItem from="1498053390326" duration="17271000" />
     </task>
     <task id="LOCAL-00001" summary="To-Do Liste">
       <created>1497277105722</created>
@@ -355,53 +485,41 @@
       <option name="project" value="LOCAL" />
       <updated>1497996648704</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Fernseher centered + Tisch + Resume on Click + Title">
+      <created>1497999868007</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1497999868007</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="51428000" />
+    <option name="totallyTimeSpent" value="51816000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-11" y="-11" width="2182" height="1368" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12083333" sideWeight="0.4875346" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12083333" sideWeight="0.48942918" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.08503937" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.08456659" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32980973" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32769555" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12083333" sideWeight="0.51246536" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12083333" sideWeight="0.5105708" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.39933443" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32913387" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32980973" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
-    <layout-to-restore>
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32913387" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.08503937" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32769555" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12083333" sideWeight="0.49369085" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32980973" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12083333" sideWeight="0.50630915" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="processedProjectFiles" value="true" />
@@ -415,12 +533,13 @@
     <MESSAGE value="Richtig viel geschafft!" />
     <MESSAGE value=".." />
     <MESSAGE value="Fix Knockback nach rechts + Impl. 2. Doppelsprung nach Schlag" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix Knockback nach rechts + Impl. 2. Doppelsprung nach Schlag" />
+    <MESSAGE value="Fernseher centered + Tisch + Resume on Click + Title" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fernseher centered + Tisch + Resume on Click + Title" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="11" />
+      <option name="time" value="6" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -597,17 +716,18 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/To-Do" />
+    <entry file="file://$PROJECT_DIR$/spiel/script/phaser.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1726945">
+          <caret line="101612" column="4" lean-forward="false" selection-start-line="101612" selection-start-column="4" selection-end-line="101612" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="jar://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/lib/JavaScriptLanguage.jar!/com/intellij/lang/javascript/index/predefined/DOMCore.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="714">
           <caret line="42" column="0" lean-forward="false" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/To-Do.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="24" lean-forward="false" selection-start-line="7" selection-start-column="24" selection-end-line="7" selection-end-column="24" />
         </state>
       </provider>
     </entry>
@@ -618,12 +738,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/spiel/assets/Stuhl_Attack_Right.png">
+    <entry file="file://$PROJECT_DIR$/spiel/assets/kugel.png">
       <provider selected="true" editor-type-id="images">
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/spiel/assets/kugel.png" />
     <entry file="file://$PROJECT_DIR$/spiel/assets/Waffe1_Stuhl1.png">
       <provider selected="true" editor-type-id="images">
         <state />
@@ -634,38 +753,73 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/spiel/assets/Stuhl_Sprite2.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/spiel/assets/OnOffButton.png">
       <provider selected="true" editor-type-id="images">
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/spiel/assets/Neuer Ordner/gestalten-design-on-off-schalter-14718165.jpg" />
-    <entry file="file://$PROJECT_DIR$/spiel/assets/Neuer Ordner/Ebene 2.png" />
-    <entry file="file://$PROJECT_DIR$/spiel/assets/Neuer Ordner/Ebene1.png" />
-    <entry file="file://$PROJECT_DIR$/spiel/assets/Neuer Ordner/Ebene 3.png" />
-    <entry file="file://$PROJECT_DIR$/spiel/assets/Neuer Ordner/Ebene 5.png" />
-    <entry file="file://$PROJECT_DIR$/spiel/assets/loadingscreen.jpg">
+    <entry file="file://$PROJECT_DIR$/spiel/assets/Neuer Ordner/gestalten-design-on-off-schalter-14718165.jpg">
       <provider selected="true" editor-type-id="images">
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/spiel/assets/loadingscreen2.png" />
+    <entry file="file://$PROJECT_DIR$/spiel/assets/Neuer Ordner/Ebene 2.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spiel/assets/Neuer Ordner/Ebene1.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spiel/assets/Neuer Ordner/Ebene 3.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spiel/assets/Neuer Ordner/Ebene 5.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tv.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/spiel/assets/loading_enger.jpg">
       <provider selected="true" editor-type-id="images">
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tv.png" />
-    <entry file="file://$PROJECT_DIR$/Tisch_Index.png" />
-    <entry file="file://$PROJECT_DIR$/css/Stylesheet.css">
+    <entry file="file://$PROJECT_DIR$/spiel/assets/loadingscreen2.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spiel/assets/loadingscreen.jpg">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Tisch_Index.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CSS/Stylesheet.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="230">
+        <state relative-caret-position="297">
           <caret line="45" column="11" lean-forward="false" selection-start-line="45" selection-start-column="11" selection-end-line="45" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spiel/Index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -673,57 +827,53 @@
     <entry file="file://$PROJECT_DIR$/Index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
-          <caret line="20" column="27" lean-forward="false" selection-start-line="20" selection-start-column="26" selection-end-line="20" selection-end-column="27" />
+          <caret line="25" column="27" lean-forward="false" selection-start-line="25" selection-start-column="26" selection-end-line="25" selection-end-column="27" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/spiel/script/healthMeter.js">
+    <entry file="file://$PROJECT_DIR$/To-Do.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1152">
-          <caret line="97" column="25" lean-forward="false" selection-start-line="97" selection-start-column="25" selection-end-line="97" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/spiel/script/damage.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="500">
-          <caret line="20" column="5" lean-forward="false" selection-start-line="20" selection-start-column="5" selection-end-line="20" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/spiel/Index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="4" column="71" lean-forward="false" selection-start-line="4" selection-start-column="71" selection-end-line="4" selection-end-column="71" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/spiel/script/phaser.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="28205" column="4" lean-forward="false" selection-start-line="28205" selection-start-column="4" selection-end-line="28205" selection-end-column="4" />
+        <state relative-caret-position="119">
+          <caret line="7" column="24" lean-forward="false" selection-start-line="7" selection-start-column="24" selection-end-line="7" selection-end-column="24" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/spiel/script/core.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="389">
-          <caret line="417" column="33" lean-forward="true" selection-start-line="417" selection-start-column="33" selection-end-line="417" selection-end-column="33" />
+        <state relative-caret-position="620">
+          <caret line="444" column="70" lean-forward="false" selection-start-line="444" selection-start-column="70" selection-end-line="444" selection-end-column="70" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/spiel/script/lives.js">
+    <entry file="file://$PROJECT_DIR$/spiel/assets/Stuhl_Attack_Right.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="350">
-          <caret line="28" column="27" lean-forward="false" selection-start-line="28" selection-start-column="27" selection-end-line="28" selection-end-column="27" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spiel/assets/Stuhl_Attack_Right.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spiel/assets/Stuhl_Attack_Right.psd">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spiel/assets/Stuhl_Sprite2.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spiel/assets/Stuhl_SpriteP1.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
       </provider>
     </entry>
   </component>
