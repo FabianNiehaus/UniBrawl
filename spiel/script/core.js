@@ -219,6 +219,8 @@ function Player(id,x,y,sprite,animations,game) {
     player.health = 0;
     player.maxHealth = 9999;
 
+    player.lives = 3;
+    player.maxLives = 5;
     return player;
 }
 
@@ -306,7 +308,7 @@ checkPlayerKill = function (Player) {
         //ausgabe.text = "Fatality!";
 
         Player.kill();
-
+        Player.lives--;
         var xy = getSpawnXY();
         Player.x = xy[0];
         Player.y = xy[1];
@@ -380,6 +382,11 @@ MainGame.prototype = {
             player1,
             {x: 20, y: 43, width: 100, height: 20}
         );
+        player1Lives = game.add.plugin(Phaser.Plugin.Lives);
+        player1Lives.icons(
+            player1,
+            {icon: 'projectile', x: 20, y: 100, width: 20, height: 20, rows: 1}
+        );
 
 
         var animations_player2=[["left",[0,1],5,true],["right",[2,3],5,true]];
@@ -393,11 +400,16 @@ MainGame.prototype = {
         player2.melee.animations.play("idle_left");
         player2.direction = 'left';
         players.add(player2);
-
         player2Damage = game.add.plugin(Phaser.Plugin.Damage);
         player2Damage.text(
             player2,
-            {x: game.world.width - 120, y: 43, width: 100, height: 20}
+            {x: game.world.width - 120, y: 43, width: 100, height: 20, rows: 1}
+        );
+
+        player2Lives = game.add.plugin(Phaser.Plugin.Lives);
+        player2Lives.icons(
+            player2,
+            {icon: 'projectile', x: game.world.width - 120, y: 100, width: 20, height: 20}
         );
 
         cursors = game.input.keyboard.createCursorKeys();
