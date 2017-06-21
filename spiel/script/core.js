@@ -248,6 +248,7 @@ checkRangedCollision = function(){
             if(otherPlayer !== currentPlayer) {
 
                 game.physics.arcade.overlap(currentPlayer.weapon.bullets, otherPlayer, function (enemy, bullet) {
+					
                     if (currentPlayer.body.center.x > enemy.body.center.x) {
                         getHit(enemy, currentPlayer.weapon, "left");
                     } else if (currentPlayer.body.center.x < enemy.body.center.x) {
@@ -383,7 +384,6 @@ MainGame.prototype = {
 		fallSound = game.add.audio('fall');
 		spawnSound = game.add.audio('spawn');
         lose = game.add.audio('lose');
-        
 
         music.loopFull(0.3);
 
@@ -593,6 +593,7 @@ MainGame.prototype = {
 
         getHit = function (player, weapon, direction) {
             if (player.isHit === -1) {
+				hitSound.play();
                 player.isHit = weapon.hitTimeout;
 
                 if (direction === "left") {
