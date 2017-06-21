@@ -342,7 +342,7 @@ MainGame.prototype = {
         game.load.spritesheet('stuhl', 'assets/Stuhl_Sprite2.png', 78, 68);
         game.load.image('ground','assets/world/Tisch2_2.png');
         game.load.image('ground2','assets/world/Tisch3.png');
-        game.load.image('background','assets/world/Mensa2_3_klein.png');
+        game.load.image('background', 'assets/world/Mensa2_4_klein.png');
         game.load.image('ground3','assets/world/kasse.png');
     },
 
