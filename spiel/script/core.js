@@ -397,7 +397,7 @@ MainGame.prototype = {
         setMeleeWeapon(player1, new Stuhl(0, 0, 'stuhl2', game));
         player1.melee.idleLeft();
         //noOfBullets, spriteName, bulletSpeed, fireRate, gravityDown, trackedSpriteName, damage, hitTimeout, game
-        player1.weapon = RangedWeapon(20, 'projectile', 300, 300, 15, 'player', 5, 10, game);
+        player1.weapon = RangedWeapon(20, 'projectile', 300, 500, 15, 'player', 5, 10, game);
         playerDirection(player1);
         players.add(player1);
 
@@ -418,7 +418,7 @@ MainGame.prototype = {
         player2 = new Player(2, spawnxy[0], spawnxy[1], 'player2', animations_player2, "left", game);
         setMeleeWeapon(player2, new Stuhl(0, 0, 'stuhl', game));
         player2.melee.idleRight();
-        player2.weapon = RangedWeapon(20, 'projectile', 300, 300, 15, 'player2', 5, 10, game);
+        player2.weapon = RangedWeapon(20, 'projectile', 300, 500, 15, 'player2', 5, 10, game);
         playerDirection(player2);
         players.add(player2);
         player2Damage = game.add.plugin(Phaser.Plugin.Damage);
@@ -447,11 +447,13 @@ MainGame.prototype = {
 
         p1cursors = game.input.keyboard.createCursorKeys();
         p1shoot = game.input.keyboard.addKey(Phaser.Keyboard.NUMPAD_0);
+        p1shoot2 = game.input.keyboard.addKey(Phaser.Keyboard.SHIFT);
         p2leftBtn = game.input.keyboard.addKey(Phaser.Keyboard.A);
         p2rightBtn = game.input.keyboard.addKey(Phaser.Keyboard.D);
         p2upBtn = game.input.keyboard.addKey(Phaser.Keyboard.W);
         p2downBtn = game.input.keyboard.addKey(Phaser.Keyboard.S);
         p2shoot = game.input.keyboard.addKey(Phaser.Keyboard.CONTROL);
+
 
         ausgabe = game.add.text(game.world.width / 2, game.world.height / 2, '', {fontSize: '32px', fill: '#6b6b6b'});
         ausgabe.anchor.setTo(0.5,0.5);
@@ -640,7 +642,7 @@ MainGame.prototype = {
                 startMelee(player2);
             }
 
-            if (p1shoot.isDown) {
+            if (p1shoot.isDown || p1shoot2.isDown) {
                 shoot(player1);
             }
 
@@ -656,27 +658,14 @@ MainGame.prototype = {
             function shoot(player) {
                 if (player.direction === 'right') {
                     player.weapon.fire(player, player.x + 10, player.y);
-                    throwSound.play();
+                    throwSound.play("", 0, 0.5, false, true);
                 }
                 if (player.direction === 'left') {
                     player.weapon.fire(player, player.x - 10, player.y);
-                    throwSound.play();
+                    throwSound.play("", 0, 0.5, false, true);
                 }
             }
         }
-    },
-
-    render: function () {
-        // game.debug.body(player1.melee);
-        //game.debug.body(player2.melee);
-        // game.debug.body(player1);
-        // game.debug.body(player2);
-
-        game.debug.body(player1.melee, 'red', false);
-        game.debug.spriteBounds(player1.melee, 'pink', false);
-
-        // game.debug.geom(player1.melee.anchor, 'rgba(255,255,255,1)' ) ;
-        // game.debug.spriteInfo(player1.melee,32,32);
     }
 };
 

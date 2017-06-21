@@ -47,7 +47,6 @@ body{
 	position: absolute;
 	pointer-events: none;
 	align-self: center;
-	box-shadow: 10px 10px 5px black;
 }
 
 #bg_tisch {
@@ -56,7 +55,6 @@ body{
 	margin-top: 0px;
 	position: absolute;
 	pointer-events: none;
-	box-shadow: 10px 10px 5px black;
 }
 
 #game
