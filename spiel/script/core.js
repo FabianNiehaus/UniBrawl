@@ -21,6 +21,7 @@ var fallSound;
 var lose;
 var ameisenkrieg;
 var tvSound;
+var gameOver = false;
 
 
 var Fernseher = {
@@ -60,18 +61,28 @@ var Fernseher = {
 };
 var MainGame = {
 	preload : function(){
-		game.load.audio('music', 'assets/music.wav');
+		game.load.audio('music', 'assets/murcielago.mp3');
 		game.load.image('background','assets/loading.jpg');
 		game.load.image('startButton', 'assets/startButton.png');
+		game.load.image('neustartButton', 'assets/neustartButton.png');
+
 	},
 	create : function(){
 		game.add.tileSprite(0, 0, 900, 600, 'background');
 		music = game.add.audio('music');
-		var startButton = game.add.button(240, 290,'startButton',this.start,this,2,1,0);
+
+		var startButton;
+		if(gameOver){
+            startButton = game.add.button(240, 290,'neustartButton',this.start,this,2,1,0);
+        }   else    {
+            startButton = game.add.button(240, 290,'startButton',this.start,this,2,1,0);
+        }
+
 	},
 
 	start : function(){
 		game.state.start('spielstart');
+        gameOver = false;
 	}
 };
 
@@ -303,22 +314,36 @@ resetGravity = function (Player) {
 };
 
 checkPlayerKill = function (Player) {
+    if(gameOver === false) {
+        if (Player.lives > 0) {
+            if (Player.y > game.height + 100 || Player.x > game.width + 100 || Player.x < -100 || Player.y < -100) {
 
-    if (Player.y > game.height + 100 || Player.x > game.width + 100 || Player.x < -100 || Player.y < -100) {
+                fallSound.play();
+                Player.kill();
+                Player.lives--;
+                var xy = getSpawnXY();
+                Player.x = xy[0];
+                Player.y = xy[1];
+                if (Player.lives > 0) {
+                    game.time.events.add(Phaser.Timer.SECOND * 3, function () {
+                        Player.revive(0);
+                        spawnSound.play();
+                    }, game);
+                }
+            }
+        } else {
+             ausgabe.text = "GAME OVER!";
+             gameOver = true;
+        }
+    } else{
 
-        //ausgabe.text = "Fatality!";
-		fallSound.play();
-        Player.kill();
-        Player.lives--;
-        var xy = getSpawnXY();
-        Player.x = xy[0];
-        Player.y = xy[1];
-
-        game.time.events.add(Phaser.Timer.SECOND * 3, function () {
-            Player.revive(0);
-			spawnSound.play();
-        }, game);
+        setTimeout(gameOverScreen(),5000);
     }
+};
+
+gameOverScreen = function() {
+    music.stop();
+    game.state.start('MainGame');
 };
 
 getSpawnXY = function () {
@@ -351,6 +376,7 @@ MainGame.prototype = {
         game.load.image('ground2','assets/world/Tisch3.png');
         game.load.image('background', 'assets/world/Mensa2_4_klein.png');
         game.load.image('ground3','assets/world/kasse.png');
+        game.load.image('heart','assets/heart.png')
 		
     },
 
@@ -390,7 +416,7 @@ MainGame.prototype = {
         player1Lives = game.add.plugin(Phaser.Plugin.Lives);
         player1Lives.icons(
             player1,
-            {icon: 'projectile', x: 20, y: 100, width: 20, height: 20, rows: 1}
+            {icon: 'heart', x: 20, y: 65}
         );
 
 
@@ -414,7 +440,7 @@ MainGame.prototype = {
         player2Lives = game.add.plugin(Phaser.Plugin.Lives);
         player2Lives.icons(
             player2,
-            {icon: 'projectile', x: game.world.width - 120, y: 100, width: 20, height: 20}
+            {icon: 'heart', x: game.world.width - 120, y: 65}
         );
 
         cursors = game.input.keyboard.createCursorKeys();

@@ -86,7 +86,10 @@ Phaser.Plugin.Lives.prototype.updateIcons = function() {
 
     while (this.healthIcons.countLiving() > this.char.lives) {
         var icon = this.healthIcons.getFirstAlive();
-        icon.kill();
+        try {
+            icon.kill();
+        } catch(error){
+        }
     }
 
     while (this.healthIcons.countLiving() < this.char.lives &&
