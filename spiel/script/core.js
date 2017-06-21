@@ -15,7 +15,9 @@ var players;
 var platforms;
 var ausgabe;
 var music;
-var hit;
+var hitSound;
+var spawnSound;
+var fallSound;
 var lose;
 var ameisenkrieg;
 var tvSound;
@@ -29,34 +31,31 @@ var Fernseher = {
 	},
 	create : function(){
 		tvSound = game.add.audio('rauschen');
-		tvSound.play();
+		//tvSound.play();
         tvSound.volume = 0.1;
         tvSound.loopFull(1);
         ameisenkrieg = game.add.sprite(0, 0, 'ameisenkrieg');
 		var flimmern = ameisenkrieg.animations.add('flimmern');
 		ameisenkrieg.animations.play('flimmern',30,true);
-		//flimmern.animations.play();
-		//game.add.tileSprite(0, 0, 900, 600, 'gif');
-		//var startButton = game.add.button(200, 400,'startButton',this.start,this,2,1,0);
 	},
 	
 	starten : function(){
-	tvSound.stop();
-	ameisenkrieg.animations.stop();
-	game.state.start('MainGame');
-},
+		tvSound.stop();
+		ameisenkrieg.animations.stop();
+		game.state.start('MainGame');
+	},
 	volumeUp : function(){
 	music.volume += 0.1;
-},
+	},
 	volumeDown : function(){
-	if(music.volume >= 0){
-		music.volume -= 0.1;
-	}
-},
+		if(music.volume >= 0){
+			music.volume -= 0.1;
+		}
+	},
 	ausschalten : function(){
-	music.stop();
-	game.state.start('offscreen');
-},
+		music.stop();
+		game.state.start('offscreen');
+	},
 
 };
 var MainGame = {
@@ -278,8 +277,10 @@ kill = function(enemy){
 };
 
 getHit = function(player, weapon, direction) {
+	
     if (player.isHit === -1) {
         player.isHit = weapon.hitTimeout;
+		hitSound.play();
 
         if (direction === "left") {
             player.body.velocity.y = weapon.knockupAmount + (weapon.knockupAmount * player.health * 0.005);
@@ -304,7 +305,7 @@ checkPlayerKill = function (Player) {
     if (Player.y > game.height + 100 || Player.x > game.width + 100 || Player.x < -100 || Player.y < -100) {
 
         //ausgabe.text = "Fatality!";
-
+		fallSound.play();
         Player.kill();
 
         var xy = getSpawnXY();
@@ -313,6 +314,7 @@ checkPlayerKill = function (Player) {
 
         game.time.events.add(Phaser.Timer.SECOND * 3, function () {
             Player.revive(0);
+			spawnSound.play();
         }, game);
     }
 };
@@ -336,6 +338,8 @@ MainGame.prototype = {
 
         game.load.audio('hit', 'assets/hit.wav');
         game.load.audio('shoot', 'assets/shoot.wav');
+		game.load.audio('fall','assets/fall.wav');
+		game.load.audio('spawn','assets/spawn.wav');
         game.load.spritesheet('player', 'assets/Spritesheet_Fabian.png', 39, 100);
         game.load.spritesheet('meleeAttack','assets/firstaid.png',35,50);
         game.load.spritesheet('projectile', 'assets/Teller.png');
@@ -346,6 +350,7 @@ MainGame.prototype = {
         game.load.image('ground2','assets/world/Tisch3.png');
         game.load.image('background', 'assets/world/Mensa2_4_klein.png');
         game.load.image('ground3','assets/world/kasse.png');
+		
     },
 
 
@@ -355,8 +360,9 @@ MainGame.prototype = {
 
         //Sound
         shoot = game.add.audio('shoot');
-        hit = game.add.audio('hit');
-
+        hitSound = game.add.audio('hit');
+		fallSound = game.add.audio('fall');
+		spawnSound = game.add.audio('spawn');
         lose = game.add.audio('lose');
         music.play();
         music.volume = 0.7;
@@ -370,7 +376,7 @@ MainGame.prototype = {
         player1 = new Player(1,spawnxy[0],spawnxy[1],'player',animations_player1,game);
         setMeleeWeapon(player1, new Stuhl(0,0,game));
         player1.anchor.setTo(0.45, 0.5);
-        player1.weapon = RangedWeapon(20, 'projectile', 300, 200, 15, 'player', 50, 10, game);
+        player1.weapon = RangedWeapon(20, 'projectile', 300, 600, 15, 'player', 50, 10, game);
         player1.melee.animations.play("idle_right");
         player1.direction = 'right';
         players.add(player1);
@@ -607,6 +613,7 @@ MainGame.prototype = {
 
         function kill(player){
             player.kill();
+			
         }
 
         function shoot(player){
