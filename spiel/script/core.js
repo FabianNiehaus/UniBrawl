@@ -341,7 +341,6 @@ MainGame.prototype = {
 		game.load.audio('fall','assets/fall.wav');
 		game.load.audio('spawn','assets/spawn.wav');
         game.load.spritesheet('player', 'assets/Spritesheet_Fabian.png', 39, 100);
-        game.load.spritesheet('meleeAttack','assets/firstaid.png',35,50);
         game.load.spritesheet('projectile', 'assets/Teller.png');
         game.load.spritesheet('player2', 'assets/Spritesheet_Mathis.png', 39, 100);
         //game.load.spritesheet('stuhl', 'assets/Waffe1_Stuhl1_5.png',35,50);

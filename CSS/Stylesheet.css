@@ -1,9 +1,11 @@
 @charset "UTF-8";
 /* CSS Document */
 body{
-	background-color: #968C35;
-
+	background-image: url(../img/background.png);
+	background-repeat: no-repeat;
+	background-size: cover;
 }
+
 #TV{
 	height: 100%;
 	width: 100%;
