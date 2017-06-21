@@ -22,6 +22,7 @@ var lose;
 var ameisenkrieg;
 var tvSound;
 var gameOver = false;
+var menuSound;
 
 
 var Fernseher = {
@@ -29,8 +30,10 @@ var Fernseher = {
 
         game.load.spritesheet('ameisenkrieg', 'assets/ameisenkrieg.png', 900, 600, 5);
 		game.load.audio('rauschen', 'assets/tvStaticNoise.wav');
+		game.load.audio('menu','assets/menu.wav');
 	},
 	create : function(){
+		menuSound = game.add.audio('menu');
 		tvSound = game.add.audio('rauschen');
 		//tvSound.play();
         //tvSound.volume = 0.1;
@@ -55,19 +58,22 @@ var Fernseher = {
 	},
 	ausschalten : function(){
 		music.stop();
+		menuSound.stop();
 		game.state.start('offscreen');
 	},
 
 };
 var MainGame = {
 	preload : function(){
-		game.load.audio('music', 'assets/murcielago.mp3');
+		game.load.audio('music', 'assets/murcielago.wav');
 		game.load.image('background','assets/loading.jpg');
 		game.load.image('startButton', 'assets/startButton.png');
 		game.load.image('neustartButton', 'assets/neustartButton.png');
 
 	},
 	create : function(){
+		menuSound.play();
+		menuSound.loopFull(1);
 		game.add.tileSprite(0, 0, 900, 600, 'background');
 		music = game.add.audio('music');
 
@@ -81,6 +87,7 @@ var MainGame = {
 	},
 
 	start : function(){
+		menuSound.stop();
 		game.state.start('spielstart');
         gameOver = false;
 	}
@@ -367,7 +374,7 @@ MainGame.prototype = {
 
 
     create: function(){
-
+		music.play();
         game.add.tileSprite(0, 0, 900, 600, 'background');
 
         //Sound
@@ -376,7 +383,7 @@ MainGame.prototype = {
 		fallSound = game.add.audio('fall');
 		spawnSound = game.add.audio('spawn');
         lose = game.add.audio('lose');
-        music.play();
+        
         music.volume = 0.7;
         music.loopFull(0.6);
 
