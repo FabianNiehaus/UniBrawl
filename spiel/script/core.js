@@ -49,7 +49,9 @@ var Fernseher = {
 	music.volume += 0.1;
 },
 	volumeDown : function(){
-	music.volume -= 0.1;
+	if(music.volume >= 0){
+		music.volume -= 0.1;
+	}
 },
 	ausschalten : function(){
 	music.stop();
