@@ -35,9 +35,8 @@ var Fernseher = {
 	create : function(){
 		menuSound = game.add.audio('menu');
 		tvSound = game.add.audio('rauschen');
-		//tvSound.play();
-        //tvSound.volume = 0.1;
-        //tvSound.loopFull(1);
+		tvSound.play();
+        tvSound.loopFull(0.1);
         ameisenkrieg = game.add.sprite(0, 0, 'ameisenkrieg');
 		var flimmern = ameisenkrieg.animations.add('flimmern');
 		ameisenkrieg.animations.play('flimmern',30,true);
@@ -73,7 +72,7 @@ var MainGame = {
 	},
 	create : function(){
 		menuSound.play();
-		menuSound.loopFull(1);
+		menuSound.loopFull(0.3);
 		game.add.tileSprite(0, 0, 900, 600, 'background');
 		music = game.add.audio('music');
 
@@ -384,8 +383,8 @@ MainGame.prototype = {
 		spawnSound = game.add.audio('spawn');
         lose = game.add.audio('lose');
         
-        music.volume = 0.7;
-        music.loopFull(0.6);
+
+        music.loopFull(0.3);
 
         players = game.add.group();
         players.enableBody = true;
