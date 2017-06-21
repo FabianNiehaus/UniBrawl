@@ -373,8 +373,8 @@ MainGame.prototype = {
         player1.direction = 'right';
         players.add(player1);
 
-        player1HealthMeter = game.add.plugin(Phaser.Plugin.HealthMeter);
-        player1HealthMeter.text(
+        player1Damage = game.add.plugin(Phaser.Plugin.Damage);
+        player1Damage.text(
             player1,
             {x: 20, y: 43, width: 100, height: 20}
         );
@@ -392,8 +392,8 @@ MainGame.prototype = {
         player2.direction = 'left';
         players.add(player2);
 
-        player2HealthMeter = game.add.plugin(Phaser.Plugin.HealthMeter);
-        player2HealthMeter.text(
+        player2Damage = game.add.plugin(Phaser.Plugin.Damage);
+        player2Damage.text(
             player2,
             {x: game.world.width - 120, y: 43, width: 100, height: 20}
         );
