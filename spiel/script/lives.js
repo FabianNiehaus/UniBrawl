@@ -26,7 +26,7 @@ Phaser.Plugin.Lives = function(game, parent) {
     this.options.icon = null;
     this.options.x = 50;
     this.options.y = 50;
-    this.options.width = 32;
+    this.options.width = 25;
     this.options.height = 32;
     this.options.rows = 1;
 };
