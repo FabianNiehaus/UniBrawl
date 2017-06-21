@@ -32,8 +32,8 @@ var Fernseher = {
 	create : function(){
 		tvSound = game.add.audio('rauschen');
 		//tvSound.play();
-        tvSound.volume = 0.1;
-        tvSound.loopFull(1);
+        //tvSound.volume = 0.1;
+        //tvSound.loopFull(1);
         ameisenkrieg = game.add.sprite(0, 0, 'ameisenkrieg');
 		var flimmern = ameisenkrieg.animations.add('flimmern');
 		ameisenkrieg.animations.play('flimmern',30,true);
@@ -48,7 +48,7 @@ var Fernseher = {
 	music.volume += 0.1;
 	},
 	volumeDown : function(){
-		if(music.volume >= 0){
+		if(music.volume > 0.1){
 			music.volume -= 0.1;
 		}
 	},
