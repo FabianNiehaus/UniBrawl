@@ -2,15 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d19df6b3-7e4d-4a41-897e-877c0e91dfca" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/spiel/assets/fall.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/spiel/assets/hit.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/spiel/assets/lose.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/spiel/assets/menu.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/spiel/assets/murcielago.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/spiel/assets/music.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/spiel/assets/shoot.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/spiel/assets/spawn.wav" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/spiel/assets/tvStaticNoise.wav" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spiel/script/core.js" afterPath="$PROJECT_DIR$/spiel/script/core.js" />
     </list>
@@ -31,8 +22,8 @@
       <file leaf-file-name="core.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/spiel/script/core.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="336">
-              <caret line="38" column="54" lean-forward="false" selection-start-line="38" selection-start-column="54" selection-end-line="38" selection-end-column="54" />
+            <state relative-caret-position="297">
+              <caret line="455" column="111" lean-forward="false" selection-start-line="455" selection-start-column="111" selection-end-line="455" selection-end-column="111" />
               <folding />
             </state>
           </provider>
@@ -69,6 +60,7 @@
       <find>'hit'</find>
       <find>timer</find>
       <find>.wav</find>
+      <find>ausgabe</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -431,7 +423,7 @@
       <workItem from="1497884104015" duration="122000" />
       <workItem from="1497953208008" duration="5066000" />
       <workItem from="1497995419665" duration="4453000" />
-      <workItem from="1498053390326" duration="21696000" />
+      <workItem from="1498053390326" duration="21911000" />
     </task>
     <task id="LOCAL-00001" summary="To-Do Liste">
       <created>1497277105722</created>
@@ -489,11 +481,18 @@
       <option name="project" value="LOCAL" />
       <updated>1498074196992</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Sounds">
+      <created>1498079124821</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1498079124821</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="56241000" />
+    <option name="totallyTimeSpent" value="56456000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -532,7 +531,8 @@
     <MESSAGE value="Fix Knockback nach rechts + Impl. 2. Doppelsprung nach Schlag" />
     <MESSAGE value="Fernseher centered + Tisch + Resume on Click + Title" />
     <MESSAGE value="alles zusammen -&gt; sieht gut aus" />
-    <option name="LAST_COMMIT_MESSAGE" value="alles zusammen -&gt; sieht gut aus" />
+    <MESSAGE value="Sounds" />
+    <option name="LAST_COMMIT_MESSAGE" value="Sounds" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -868,8 +868,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/spiel/script/core.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="38" column="54" lean-forward="false" selection-start-line="38" selection-start-column="54" selection-end-line="38" selection-end-column="54" />
+        <state relative-caret-position="297">
+          <caret line="455" column="111" lean-forward="false" selection-start-line="455" selection-start-column="111" selection-end-line="455" selection-end-column="111" />
           <folding />
         </state>
       </provider>

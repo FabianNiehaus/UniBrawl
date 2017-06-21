@@ -453,7 +453,7 @@ MainGame.prototype = {
         p2downBtn = game.input.keyboard.addKey(Phaser.Keyboard.S);
         p2shoot = game.input.keyboard.addKey(Phaser.Keyboard.CONTROL);
 
-        ausgabe = game.add.text(game.world.width/2, game.world.height/2, '', { fontSize: '32px', fill: '#FFFFFF' });
+        ausgabe = game.add.text(game.world.width / 2, game.world.height / 2, '', {fontSize: '32px', fill: '#6b6b6b'});
         ausgabe.anchor.setTo(0.5,0.5);
 
         startSound.play();
