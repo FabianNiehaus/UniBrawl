@@ -254,6 +254,7 @@ checkRangedCollision = function(){
             if(otherPlayer !== currentPlayer) {
 
                 game.physics.arcade.overlap(currentPlayer.weapon.bullets, otherPlayer, function (enemy, bullet) {
+
                     if (currentPlayer.body.center.x > enemy.body.center.x) {
                         getHit(enemy, currentPlayer.weapon, "left");
                     } else if (currentPlayer.body.center.x < enemy.body.center.x) {
