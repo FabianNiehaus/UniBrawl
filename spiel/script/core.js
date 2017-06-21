@@ -14,23 +14,31 @@ var player2;
 var players;
 var platforms;
 var ausgabe;
+
+var ameisenkrieg;
+
+var gameOver = false;
+
 var music;
 var hitSound;
 var spawnSound;
 var fallSound;
 var lose;
-var ameisenkrieg;
 var tvSound;
-var gameOver = false;
 var menuSound;
 
+var jump1Sound;
+var jump2Sound;
+var startSound;
+var throwSound;
+var winSound;
 
 var Fernseher = {
 	preload : function(){
 
         game.load.spritesheet('ameisenkrieg', 'assets/ameisenkrieg.png', 900, 600, 5);
-		game.load.audio('rauschen', 'assets/tvStaticNoise.wav');
-		game.load.audio('menu','assets/menu.wav');
+        game.load.audio('rauschen', 'assets/sound/tvStaticNoise.wav');
+        game.load.audio('menu', 'assets/sound/menu.wav');
 	},
 	create : function(){
 		menuSound = game.add.audio('menu');
@@ -48,7 +56,7 @@ var Fernseher = {
 		game.state.start('MainGame');
 	},
 	volumeUp : function(){
-	music.volume += 0.1;
+        music.volume += 0.1;
 	},
 	volumeDown : function(){
 		if(music.volume > 0.1){
@@ -59,12 +67,12 @@ var Fernseher = {
 		music.stop();
 		menuSound.stop();
 		game.state.start('offscreen');
-	},
+    }
 
 };
 var MainGame = {
 	preload : function(){
-		game.load.audio('music', 'assets/murcielago.wav');
+        game.load.audio('music', 'assets/sound/murcielago.wav');
 		game.load.image('background','assets/loading.jpg');
 		game.load.image('startButton', 'assets/startButton.png');
 		game.load.image('neustartButton', 'assets/neustartButton.png');
@@ -192,9 +200,7 @@ function MeleeWeapon(x, y, sprite, damage, knockupAmount, hitTimeout, attackTime
 function Stuhl(x, y, sprite, game) {
 
     //x, y, sprite, damage, knockupAmount, hitTimeout, attackTimeoutAmount, anchorRight, anchorY, game
-    var stuhl = new MeleeWeapon(x, y, sprite, 10, -150, 50, 75, 0.05, 0.05, game);
-
-    return stuhl;
+    return new MeleeWeapon(x, y, sprite, 10, -150, 50, 75, 0.05, 0.05, game);
 
 }
 
@@ -266,55 +272,36 @@ kill = function(enemy){
     enemy.kill();
 };
 
-getHit = function(player, weapon, direction) {
-
-    if (player.isHit === -1) {
-        player.isHit = weapon.hitTimeout;
-		hitSound.play();
-
-        if (direction === "left") {
-            player.body.velocity.y = weapon.knockupAmount + (weapon.knockupAmount * player.health * 0.005);
-            player.body.velocity.x = (weapon.knockbackAmount + (weapon.knockbackAmount * player.health * 0.01)) * -1;
-            player.doubleJump = true;
-        } else if (direction === "right") {
-            player.body.velocity.y = weapon.knockupAmount + (weapon.knockupAmount * player.health * 0.005);
-            player.body.velocity.x = weapon.knockbackAmount + (weapon.knockbackAmount * player.health * 0.01);
-            player.doubleJump = true;
-        }
-
-        player.health += weapon.damage;
-    }
-};
-
 resetGravity = function (Player) {
     Player.body.gravity.y = 450;
 };
 
 checkPlayerKill = function (Player) {
-    if(gameOver === false) {
-        if (Player.lives > 0) {
-            if (Player.y > game.height + 100 || Player.x > game.width + 100 || Player.x < -100 || Player.y < -100) {
 
-                fallSound.play();
-                Player.kill();
-                Player.lives--;
-                var xy = getSpawnXY();
-                Player.x = xy[0];
-                Player.y = xy[1];
-                if (Player.lives > 0) {
-                    game.time.events.add(Phaser.Timer.SECOND * 3, function () {
-                        Player.revive(0);
-                        spawnSound.play();
-                    }, game);
-                }
+    if (Player.lives > 0) {
+        if (Player.y > game.height + 100 || Player.x > game.width + 100 || Player.x < -100 || Player.y < -100) {
+
+            fallSound.play();
+            Player.kill();
+            Player.lives--;
+            var xy = getSpawnXY();
+            Player.x = xy[0];
+            Player.y = xy[1];
+            if (Player.lives > 0) {
+                game.time.events.add(Phaser.Timer.SECOND * 3, function () {
+                    Player.revive(0);
+                    spawnSound.play();
+                }, game);
             }
-        } else {
-             ausgabe.text = "GAME OVER!";
-             gameOver = true;
         }
-    } else{
-
-        setTimeout(gameOverScreen(),5000);
+    } else {
+        ausgabe.text = "GAME OVER! Player " + Player.id + " lost!";
+        game.gameOver = true;
+        winSound.play();
+        game.time.events.add(Phaser.Timer.SECOND * 5, function () {
+            gameOverScreen();
+            lose.play();
+        });
     }
 };
 
@@ -353,27 +340,36 @@ playerDirection = function (Player) {
 MainGame.prototype = {
 
     preload: function() {
-        game.load.audio('lose', 'assets/lose.wav');
+        game.load.audio('lose', 'assets/sound/lose.wav');
 
-        game.load.audio('hit', 'assets/hit.wav');
-        game.load.audio('shoot', 'assets/shoot.wav');
-		game.load.audio('fall','assets/fall.wav');
-		game.load.audio('spawn','assets/spawn.wav');
+        game.load.audio('hit', 'assets/sound/hit.wav');
+        game.load.audio('shoot', 'assets/sound/shoot.wav');
+        game.load.audio('fall', 'assets/sound/fall.wav');
+        game.load.audio('spawn', 'assets/sound/spawn.wav');
+        game.load.audio('jump1', 'assets/sound/jump1.wav');
+        game.load.audio('jump2', 'assets/sound/jump2.wav');
+        game.load.audio('start', 'assets/sound/start.wav');
+        game.load.audio('throw', 'assets/sound/throw.wav');
+        game.load.audio('win', 'assets/sound/win.wav');
+
         game.load.spritesheet('player', 'assets/Spritesheet_Fabian.png', 39, 100);
         game.load.spritesheet('projectile', 'assets/Teller.png');
         game.load.spritesheet('player2', 'assets/Spritesheet_Mathis.png', 39, 100);
         game.load.spritesheet('stuhl', 'assets/Stuhl_Sprite2.png', 78, 68);
         game.load.spritesheet('stuhl2', 'assets/Stuhl_SpriteP1.png', 78, 68);
+
         game.load.image('ground','assets/world/Tisch2_2.png');
         game.load.image('ground2','assets/world/Tisch3.png');
         game.load.image('background', 'assets/world/Mensa2_4_klein.png');
         game.load.image('ground3','assets/world/kasse.png');
-        game.load.image('heart','assets/heart.png')
+        game.load.image('heart', 'assets/heart.png');
 
     },
 
 
     create: function(){
+        game.gameOver = false;
+
 		music.play();
         game.add.tileSprite(0, 0, 900, 600, 'background');
 
@@ -383,7 +379,11 @@ MainGame.prototype = {
 		fallSound = game.add.audio('fall');
 		spawnSound = game.add.audio('spawn');
         lose = game.add.audio('lose');
-        
+        jump1Sound = game.add.audio('jump1');
+        jump2Sound = game.add.audio('jump2');
+        startSound = game.add.audio('start');
+        throwSound = game.add.audio('throw');
+        winSound = game.add.audio('win');
 
         music.loopFull(0.3);
 
@@ -455,204 +455,214 @@ MainGame.prototype = {
         ausgabe = game.add.text(game.world.width/2, game.world.height/2, '', { fontSize: '32px', fill: '#FFFFFF' });
         ausgabe.anchor.setTo(0.5,0.5);
 
+        startSound.play();
     },
 
     update: function() {
 
-        players.forEach(function (Player) {
-            checkPlayerKill(Player);
-        });
+        if (!game.gameOver) {
+            players.forEach(function (Player) {
+                checkPlayerKill(Player);
+            });
 
-        players.forEach(function (Player) {
-            var melee = Player.melee;
-            if (melee.attacking) {
-                //Check if weapon should start returning to original position
-                if (melee.angle >= melee.maxAngle - 5 && melee.angle <= melee.maxAngle + 5) {
-                    melee.returning = true;
-                }
-                //Swing Animation
-                if (melee.returning === false) {
-                    melee.angle += melee.maxAngle / 20;
-                    if (melee.maxAngle < 0) {
-                        melee.body.x = Player.centerX - melee.body.width;
-                    } else {
-                        melee.body.x = Player.centerX;
+            players.forEach(function (Player) {
+                var melee = Player.melee;
+                if (melee.attacking) {
+                    //Check if weapon should start returning to original position
+                    if (melee.angle >= melee.maxAngle - 5 && melee.angle <= melee.maxAngle + 5) {
+                        melee.returning = true;
                     }
+                    //Swing Animation
+                    if (melee.returning === false) {
+                        melee.angle += melee.maxAngle / 20;
+                        if (melee.maxAngle < 0) {
+                            melee.body.x = Player.centerX - melee.body.width;
+                        } else {
+                            melee.body.x = Player.centerX;
+                        }
+                    } else {
+                        melee.angle -= melee.maxAngle / 20;
+                        if (melee.maxAngle < 0) {
+                            melee.body.x = Player.centerX - melee.body.width;
+                        } else {
+                            melee.body.x = Player.centerX;
+                        }
+                    }
+                    //End Animation on return to original position
+                    if (melee.angle >= melee.originalAngle - 5 && melee.angle <= melee.originalAngle + 5) {
+                        melee.returning = false;
+                        melee.attacking = false;
+                        if (melee.maxAngle > 0) {
+                            melee.idleRight();
+                        } else {
+                            melee.idleLeft();
+                        }
+                    }
+                }
+            });
+
+            game.physics.arcade.collide(player1, platforms);
+            game.physics.arcade.collide(player2, platforms);
+            game.physics.arcade.collide(player1, player2);
+
+            players.forEach(function (currentPlayer) {
+                if (currentPlayer.melee.attacking) {
+                    players.forEach(function (otherPlayer) {
+                        if (otherPlayer !== currentPlayer) {
+                            game.physics.arcade.overlap(currentPlayer.melee, otherPlayer, function (melee, enemy) {
+                                if (currentPlayer.body.center.x > enemy.body.center.x) {
+                                    getHit(enemy, melee, "left");
+                                } else if (currentPlayer.body.center.x < enemy.body.center.x) {
+                                    getHit(enemy, melee, "right");
+                                }
+                            });
+                        }
+                    });
+                }
+            });
+
+            players.forEach(function (currentPlayer) {
+                if (currentPlayer.isHit > -1) {
+                    currentPlayer.isHit--;
+                    if (currentPlayer.isHit === -1) {
+                        currentPlayer.isHit = -30;
+                        resetGravity(currentPlayer);
+                    }
+                }
+                if (currentPlayer.isHit < -1) {
+                    currentPlayer.isHit++;
+                }
+                if (currentPlayer.melee.attackTimeout > 0) {
+                    currentPlayer.melee.attackTimeout--;
+                }
+            });
+
+            checkRangedCollision();
+
+
+            if (player1.isHit <= -1) {
+                player1.body.velocity.x = 0;
+
+                if (p1cursors.left.isDown) {
+                    player1.direction = 'left';
+                    playerDirection(player1);
+                } else if (p1cursors.right.isDown) {
+                    player1.direction = 'right';
+                    playerDirection(player1);
                 } else {
-                    melee.angle -= melee.maxAngle / 20;
-                    if (melee.maxAngle < 0) {
-                        melee.body.x = Player.centerX - melee.body.width;
-                    } else {
-                        melee.body.x = Player.centerX;
+                    player1.animations.stop();
+                }
+
+                if (p1cursors.up.isDown && !player1.body.touching.down && player1.doubleJump === true) {
+                    player1.body.velocity.y = -350;
+                    jump2Sound.play();
+                    player1.doubleJump = false;
+                }
+
+                if (p1cursors.up.isDown &&
+                    player1.body.touching.down) {
+                    player1.body.velocity.y = -350;
+                    jump1Sound.play();
+                    game.time.events.add(Phaser.Timer.SECOND * 1, function () {
+                        player1.doubleJump = true
+                    }, this);
+                }
+            }
+
+            if (player2.isHit <= -1) {
+                player2.body.velocity.x = 0;
+
+                if (p2leftBtn.isDown) {
+                    player2.direction = 'left';
+                    playerDirection(player2);
+
+                } else if (p2rightBtn.isDown) {
+                    player2.direction = 'right';
+                    playerDirection(player2);
+                } else {
+                    player2.animations.stop();
+                }
+
+                if (p2upBtn.isDown && !player2.body.touching.down && player2.doubleJump === true) {
+                    player2.body.velocity.y = -350;
+                    jump2Sound.play();
+                    player2.doubleJump = false;
+                }
+
+                if (p2upBtn.isDown &&
+                    player2.body.touching.down) {
+                    player2.body.velocity.y = -350;
+                    jump1Sound.play();
+                    game.time.events.add(Phaser.Timer.SECOND * 1, function () {
+                        player2.doubleJump = true
+                    }, this);
+                }
+            }
+
+            getHit = function (player, weapon, direction) {
+                if (player.isHit === -1) {
+                    player.isHit = weapon.hitTimeout;
+                    hitSound.play();
+
+
+                    if (direction === "left") {
+                        player.body.velocity.y = weapon.knockupAmount + (weapon.knockupAmount * player.health * 0.005);
+                        player.body.velocity.x = (weapon.knockbackAmount + (weapon.knockbackAmount * player.health * 0.01)) * -1;
+                        player.doubleJump = true;
+                    } else if (direction === "right") {
+                        player.body.velocity.y = weapon.knockupAmount + (weapon.knockupAmount * player.health * 0.005);
+                        player.body.velocity.x = weapon.knockbackAmount + (weapon.knockbackAmount * player.health * 0.01);
+                        player.doubleJump = true;
+                    }
+
+                    player.health += weapon.damage;
+                }
+            };
+
+            startMelee = function (Player) {
+                if (!Player.melee.attacking && Player.melee.attackTimeout === 0) {
+                    if (Player.direction === 'right') {
+                        Player.melee.attackRight();
+                        Player.melee.attackTimeout = Player.melee.attackTimeoutAmount;
+                    } else if (Player.direction === 'left') {
+                        Player.melee.attackLeft();
+                        Player.melee.attackTimeout = Player.melee.attackTimeoutAmount;
                     }
                 }
-                //End Animation on return to original position
-                if (melee.angle >= melee.originalAngle - 5 && melee.angle <= melee.originalAngle + 5) {
-                    melee.returning = false;
-                    melee.attacking = false;
-                    if (melee.maxAngle > 0) {
-                        melee.idleRight();
-                    } else {
-                        melee.idleLeft();
-                    }
+            };
+
+            if (p1cursors.down.isDown) {
+                startMelee(player1);
+            }
+
+            if (p2downBtn.isDown) {
+                startMelee(player2);
+            }
+
+            if (p1shoot.isDown) {
+                shoot(player1);
+            }
+
+            if (p2shoot.isDown) {
+                shoot(player2);
+            }
+
+            function kill(player) {
+                player.kill();
+
+            }
+
+            function shoot(player) {
+                if (player.direction === 'right') {
+                    player.weapon.fire(player, player.x + 10, player.y);
+                    throwSound.play();
+                }
+                if (player.direction === 'left') {
+                    player.weapon.fire(player, player.x - 10, player.y);
+                    throwSound.play();
                 }
             }
-        });
-
-        game.physics.arcade.collide(player1,platforms);
-        game.physics.arcade.collide(player2,platforms);
-        game.physics.arcade.collide(player1,player2);
-
-        players.forEach(function (currentPlayer) {
-            if (currentPlayer.melee.attacking) {
-                players.forEach(function (otherPlayer) {
-                    if (otherPlayer !== currentPlayer) {
-                        game.physics.arcade.overlap(currentPlayer.melee, otherPlayer, function (melee, enemy) {
-                            if (currentPlayer.body.center.x > enemy.body.center.x) {
-                                getHit(enemy, melee, "left");
-                            } else if (currentPlayer.body.center.x < enemy.body.center.x) {
-                                getHit(enemy, melee, "right");
-                            }
-                        });
-                    }
-                });
-            }
-        });
-
-        players.forEach(function(currentPlayer){
-            if (currentPlayer.isHit > -1) {
-                currentPlayer.isHit--;
-                if (currentPlayer.isHit === -1) {
-                    currentPlayer.isHit = -30;
-                    resetGravity(currentPlayer);
-                }
-            }
-            if (currentPlayer.isHit < -1) {
-                currentPlayer.isHit++;
-            }
-            if (currentPlayer.melee.attackTimeout > 0) {
-                currentPlayer.melee.attackTimeout--;
-            }
-        });
-
-        checkRangedCollision();
-
-
-        if (player1.isHit <= -1) {
-            player1.body.velocity.x = 0;
-
-            if (p1cursors.left.isDown) {
-                player1.direction = 'left';
-                playerDirection(player1);
-            } else if (p1cursors.right.isDown) {
-                player1.direction = 'right';
-                playerDirection(player1);
-            } else {
-                player1.animations.stop();
-            }
-
-            if (p1cursors.up.isDown && !player1.body.touching.down && player1.doubleJump === true) {
-                player1.body.velocity.y = -350;
-                player1.doubleJump = false;
-            }
-
-            if (p1cursors.up.isDown &&
-                player1.body.touching.down) {
-                player1.body.velocity.y = -350;
-                game.time.events.add(Phaser.Timer.SECOND * 1, function () {
-                    player1.doubleJump = true
-                }, this);
-            }
         }
-
-        if (player2.isHit <= -1) {
-            player2.body.velocity.x = 0;
-
-            if(p2leftBtn.isDown){
-                player2.direction = 'left';
-                playerDirection(player2);
-
-            }else if(p2rightBtn.isDown){
-                player2.direction = 'right';
-                playerDirection(player2);
-            }else{
-                player2.animations.stop();
-            }
-
-            if(p2upBtn.isDown && !player2.body.touching.down && player2.doubleJump === true){
-                player2.body.velocity.y = -350;
-                player2.doubleJump  = false;
-            }
-
-            if(p2upBtn.isDown &&
-                player2.body.touching.down){
-                player2.body.velocity.y = -350;
-                game.time.events.add(Phaser.Timer.SECOND * 1, function(){player2.doubleJump = true},this);
-            }
-        }
-
-        getHit = function (player, weapon, direction) {
-            if (player.isHit === -1) {
-                player.isHit = weapon.hitTimeout;
-
-                if (direction === "left") {
-                    player.body.velocity.y = weapon.knockupAmount + (weapon.knockupAmount * player.health * 0.005);
-                    player.body.velocity.x = (weapon.knockbackAmount + (weapon.knockbackAmount * player.health * 0.01)) * -1;
-                    player.doubleJump = true;
-                } else if (direction === "right") {
-                    player.body.velocity.y = weapon.knockupAmount + (weapon.knockupAmount * player.health * 0.005);
-                    player.body.velocity.x = weapon.knockbackAmount + (weapon.knockbackAmount * player.health * 0.01);
-                    player.doubleJump = true;
-                }
-
-                player.health += weapon.damage;
-            }
-        };
-
-        startMelee = function (Player) {
-            if (!Player.melee.attacking && Player.melee.attackTimeout === 0) {
-                if (Player.direction === 'right') {
-                    Player.melee.attackRight();
-                    Player.melee.attackTimeout = Player.melee.attackTimeoutAmount;
-                } else if (Player.direction === 'left') {
-                    Player.melee.attackLeft();
-                    Player.melee.attackTimeout = Player.melee.attackTimeoutAmount;
-                }
-            }
-        };
-
-        if (p1cursors.down.isDown) {
-            startMelee(player1);
-        }
-
-        if(p2downBtn.isDown){
-            startMelee(player2);
-        }
-
-        if (p1shoot.isDown)
-        {
-            shoot(player1);
-        }
-
-        if (p2shoot.isDown)
-        {
-            shoot(player2);
-        }
-
-        function kill(player){
-            player.kill();
-
-        }
-
-        function shoot(player){
-            if(player.direction === 'right') {
-                player.weapon.fire(player, player.x + 10, player.y);
-            }
-            if(player.direction === 'left') {
-                player.weapon.fire(player, player.x - 10, player.y);
-            }
-        }
-
     },
 
     render: function () {
