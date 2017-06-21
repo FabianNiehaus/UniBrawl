@@ -2,9 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d19df6b3-7e4d-4a41-897e-877c0e91dfca" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/spiel/assets/Stuhl_Attack_Right.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/spiel/assets/Stuhl_Attack_Right.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/spiel/assets/Stuhl_Attack_Right.psd" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spiel/script/core.js" afterPath="$PROJECT_DIR$/spiel/script/core.js" />
     </list>
@@ -22,25 +19,25 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="450">
-      <file leaf-file-name="core.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="core.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/spiel/script/core.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="620">
-              <caret line="444" column="70" lean-forward="false" selection-start-line="444" selection-start-column="70" selection-end-line="444" selection-end-column="70" />
+            <state relative-caret-position="365">
+              <caret line="341" column="31" lean-forward="false" selection-start-line="341" selection-start-column="31" selection-end-line="341" selection-end-column="31" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Stuhl_SpriteP1.png" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/spiel/assets/Stuhl_SpriteP1.png">
+      <file leaf-file-name="Stuhl_Sprite2.png" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/spiel/assets/Stuhl_Sprite2.png">
           <provider selected="true" editor-type-id="images">
             <state />
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Stuhl_Sprite2.png" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/spiel/assets/Stuhl_Sprite2.png">
+      <file leaf-file-name="Stuhl_SpriteP1.png" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/spiel/assets/Stuhl_SpriteP1.png">
           <provider selected="true" editor-type-id="images">
             <state />
           </provider>
@@ -155,6 +152,24 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="script" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="UniBrawl" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="UniBrawl" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="spiel" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="assets" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -189,14 +204,7 @@
           <option name="mySupportsDeletion" value="false" />
           <option name="myCanBeAbsent" value="false" />
           <option name="myId" value="UPDATED" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/.idea/workspace.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/CSS/Stylesheet.css</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Index.html</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/spiel/Index.html</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/spiel/assets/Spritesheet_Fabian.png</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/spiel/assets/Spritesheet_Mathis.png</PATH>
           <PATH vcs="Git" revision="">$PROJECT_DIR$/spiel/assets/Stuhl_Sprite2.png</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/spiel/assets/hit.wav</PATH>
           <PATH vcs="Git" revision="">$PROJECT_DIR$/spiel/script/core.js</PATH>
         </FILE-GROUP>
         <FILE-GROUP>
@@ -205,18 +213,6 @@
           <option name="mySupportsDeletion" value="false" />
           <option name="myCanBeAbsent" value="false" />
           <option name="myId" value="CREATED" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/img/Tisch_Index.png</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/img/background.png</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/img/tv.png</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/spiel/assets/ameisenkrieg.png</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/spiel/assets/fall.wav</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/spiel/assets/heart.png</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/spiel/assets/murcielago.mp3</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/spiel/assets/neustartButton.png</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/spiel/assets/spawn.wav</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/spiel/assets/world/Mensa2_4_klein.png</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/spiel/script/damage.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/spiel/script/lives.js</PATH>
         </FILE-GROUP>
         <FILE-GROUP>
           <option name="myUpdateName" value="Deleted" />
@@ -224,31 +220,6 @@
           <option name="mySupportsDeletion" value="false" />
           <option name="myCanBeAbsent" value="true" />
           <option name="myId" value="REMOVED_FROM_REPOSITORY" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/Tisch_Index.png</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/spiel/assets/Neuer Ordner/Ebene 2.png</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/spiel/assets/Neuer Ordner/Ebene 3.png</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/spiel/assets/Neuer Ordner/Ebene 4.png</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/spiel/assets/Neuer Ordner/Ebene 5.png</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/spiel/assets/Neuer Ordner/Ebene1.png</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/spiel/assets/Neuer Ordner/gestalten-design-on-off-schalter-14718165.jpg</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/spiel/assets/ameisenkrieg2.png</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/spiel/assets/armeisenkrieg.gif</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/spiel/assets/baddie3.png</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/spiel/assets/banner_klein.png</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/spiel/assets/diamond.png</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/spiel/assets/dude.png</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/spiel/assets/dude.psd</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/spiel/assets/dude_attack.png</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/spiel/assets/dude_attack.psd</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/spiel/assets/firstaid.png</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/spiel/assets/kugel.png</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/spiel/assets/loadingscreen2.png</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/spiel/assets/platform.png</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/spiel/assets/sky.png</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/spiel/assets/star.png</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/spiel/assets/world/Mensa2_3_klein.png</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/tv.png</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/tv.svg</PATH>
         </FILE-GROUP>
         <FILE-GROUP>
           <option name="myUpdateName" value="Restored" />
@@ -448,7 +419,7 @@
       <workItem from="1497884104015" duration="122000" />
       <workItem from="1497953208008" duration="5066000" />
       <workItem from="1497995419665" duration="4453000" />
-      <workItem from="1498053390326" duration="17271000" />
+      <workItem from="1498053390326" duration="18235000" />
     </task>
     <task id="LOCAL-00001" summary="To-Do Liste">
       <created>1497277105722</created>
@@ -492,11 +463,18 @@
       <option name="project" value="LOCAL" />
       <updated>1497999868007</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Fernseher centered + Tisch + Resume on Click + Title">
+      <created>1498073225132</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1498073225132</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="51816000" />
+    <option name="totallyTimeSpent" value="52780000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -840,14 +818,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/spiel/script/core.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="620">
-          <caret line="444" column="70" lean-forward="false" selection-start-line="444" selection-start-column="70" selection-end-line="444" selection-end-column="70" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/spiel/assets/Stuhl_Attack_Right.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -874,6 +844,14 @@
     <entry file="file://$PROJECT_DIR$/spiel/assets/Stuhl_SpriteP1.png">
       <provider selected="true" editor-type-id="images">
         <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spiel/script/core.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="365">
+          <caret line="341" column="31" lean-forward="false" selection-start-line="341" selection-start-column="31" selection-end-line="341" selection-end-column="31" />
+          <folding />
+        </state>
       </provider>
     </entry>
   </component>

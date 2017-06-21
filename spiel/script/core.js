@@ -189,10 +189,10 @@ function MeleeWeapon(x, y, sprite, damage, knockupAmount, hitTimeout, attackTime
 }
 
 
-function Stuhl(x, y, game){
+function Stuhl(x, y, sprite, game) {
 
     //x, y, sprite, damage, knockupAmount, hitTimeout, attackTimeoutAmount, anchorRight, anchorY, game
-    var stuhl = new MeleeWeapon(x, y, 'stuhl', 10, -150, 50, 75, 0.05, 0.05, game);
+    var stuhl = new MeleeWeapon(x, y, sprite, 10, -150, 50, 75, 0.05, 0.05, game);
 
     return stuhl;
 
@@ -339,12 +339,12 @@ playerDirection = function (Player) {
 
     if (Player.direction === "left") {
         Player.melee.idleLeft();
-        Player.anchor.set(0.755, 0.4575);
+        Player.anchor.set(0.7775, 0.4325);
         Player.body.velocity.x = -150;
         Player.animations.play('left');
     } else if (Player.direction === "right") {
         Player.melee.idleRight();
-        Player.anchor.set(0.245, 0.4575);
+        Player.anchor.set(0.2225, 0.4325);
         Player.body.velocity.x = 150;
         Player.animations.play('right');
     }
@@ -363,6 +363,7 @@ MainGame.prototype = {
         game.load.spritesheet('projectile', 'assets/Teller.png');
         game.load.spritesheet('player2', 'assets/Spritesheet_Mathis.png', 39, 100);
         game.load.spritesheet('stuhl', 'assets/Stuhl_Sprite2.png', 78, 68);
+        game.load.spritesheet('stuhl2', 'assets/Stuhl_SpriteP1.png', 78, 68);
         game.load.image('ground','assets/world/Tisch2_2.png');
         game.load.image('ground2','assets/world/Tisch3.png');
         game.load.image('background', 'assets/world/Mensa2_4_klein.png');
@@ -392,7 +393,7 @@ MainGame.prototype = {
         var animations_player1 = [["left", [0, 1], 5, true], ["right", [2, 3], 5, true]];
 		var spawnxy = getSpawnXY();
         player1 = new Player(1, spawnxy[0], spawnxy[1], 'player', animations_player1, "right", game);
-        setMeleeWeapon(player1, new Stuhl(0,0,game));
+        setMeleeWeapon(player1, new Stuhl(0, 0, 'stuhl2', game));
         player1.melee.idleLeft();
         //noOfBullets, spriteName, bulletSpeed, fireRate, gravityDown, trackedSpriteName, damage, hitTimeout, game
         player1.weapon = RangedWeapon(20, 'projectile', 300, 300, 15, 'player', 5, 10, game);
@@ -414,7 +415,7 @@ MainGame.prototype = {
         var animations_player2=[["left",[0,1],5,true],["right",[2,3],5,true]];
 		spawnxy = getSpawnXY();
         player2 = new Player(2, spawnxy[0], spawnxy[1], 'player2', animations_player2, "left", game);
-        setMeleeWeapon(player2, new Stuhl(0,0,game));
+        setMeleeWeapon(player2, new Stuhl(0, 0, 'stuhl', game));
         player2.melee.idleRight();
         player2.weapon = RangedWeapon(20, 'projectile', 300, 300, 15, 'player2', 5, 10, game);
         playerDirection(player2);
@@ -613,7 +614,7 @@ MainGame.prototype = {
                 if (Player.direction === 'right') {
                     Player.melee.attackRight();
                     Player.melee.attackTimeout = Player.melee.attackTimeoutAmount;
-                } else if (player1.direction === 'left') {
+                } else if (Player.direction === 'left') {
                     Player.melee.attackLeft();
                     Player.melee.attackTimeout = Player.melee.attackTimeoutAmount;
                 }
