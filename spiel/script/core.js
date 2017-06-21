@@ -370,7 +370,6 @@ MainGame.prototype = {
         game.load.spritesheet('player', 'assets/Spritesheet_Fabian.png', 39, 100);
         game.load.spritesheet('projectile', 'assets/Teller.png');
         game.load.spritesheet('player2', 'assets/Spritesheet_Mathis.png', 39, 100);
-        //game.load.spritesheet('stuhl', 'assets/Waffe1_Stuhl1_5.png',35,50);
         game.load.spritesheet('stuhl', 'assets/Stuhl_Sprite2.png', 78, 68);
         game.load.image('ground','assets/world/Tisch2_2.png');
         game.load.image('ground2','assets/world/Tisch3.png');
@@ -404,7 +403,7 @@ MainGame.prototype = {
         setMeleeWeapon(player1, new Stuhl(0,0,game));
         player1.anchor.setTo(0.45, 0.5);
         player1.weapon = RangedWeapon(20, 'projectile', 300, 600, 15, 'player', 50, 10, game);
-        player1.melee.animations.play("idle_right");
+        player1.melee.animations.play("idle_left");
         player1.direction = 'right';
         players.add(player1);
 
